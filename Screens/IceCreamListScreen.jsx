@@ -1,4 +1,4 @@
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { getIceCreamByCategoryOrBrandID } from "../sanity";
 import Header from "../components/Header";
@@ -35,19 +35,24 @@ const IceCreamListScreen = ({ route }) => {
           <Text style={{ textTransform: "lowercase" }}>'s</Text> Product
           Collection
         </Text>
+        {/* <View style={{ flex: 1 }}> */}
         {iceCreams?.length > 1 ? (
-          <View
-            style={{
+          <ScrollView
+            contentContainerStyle={{
+              justifyContent: "space-between",
               flexDirection: "row",
               flexWrap: "wrap",
               gap: 15,
               marginTop: 20,
+              paddingBottom: 100,
             }}
+            showsVerticalScrollIndicator={false}
+            // horizontal
           >
             {iceCreams.map((ice, i) => (
               <IceCreamCard key={i} ice={ice} />
             ))}
-          </View>
+          </ScrollView>
         ) : (
           <View
             style={{
@@ -70,6 +75,7 @@ const IceCreamListScreen = ({ route }) => {
             )}
           </View>
         )}
+        {/* </View> */}
       </View>
     </View>
   );

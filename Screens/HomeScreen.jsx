@@ -76,7 +76,7 @@ const HomeScreen = () => {
           >
             <CarouselComponent refreshing={refreshing} />
             <Categories refreshing={refreshing} />
-            <PopularBrands />
+            <PopularBrands refreshing={refreshing} />
             {featured?.map((featured) => (
               <FeaturedRow key={featured?._id} featured={featured} />
             ))}

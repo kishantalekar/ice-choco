@@ -13,7 +13,7 @@ import {
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  console.log(item);
+
   const handleAddToCart = () => {
     try {
       const { _id, brand, category, image, name, price, short_description } =

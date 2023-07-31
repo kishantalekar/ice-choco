@@ -17,7 +17,6 @@ let feedbackRef = collection(db, "feedback");
 export const addOrder = (orderDetails, setLoading) => {
   addDoc(orderRef, orderDetails)
     .then((docRef) => {
-      console.log(docRef, "from insode");
       setLoading(false);
       return docRef;
     })
@@ -48,7 +47,6 @@ export const addRatingToOrders = async (orderId, rating) => {
     await updateDoc(orderDocRef, {
       rating: rating,
     });
-    // console.log("Rating updated in Firebase:", rating);
   } catch (error) {
     console.error("Error updating rating in Firebase:", error);
   }

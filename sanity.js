@@ -20,7 +20,7 @@ export const getCategories = async () => {
         ...,
     }
     `);
-    // console.log(categories);
+
     return categories;
   } catch (error) {
     console.log(error);
@@ -34,7 +34,7 @@ export const getBrands = async () => {
         ...,
     }
     `);
-    // console.log(categories);
+
     return categories;
   } catch (error) {
     console.log(error);

@@ -59,9 +59,7 @@ const IceCreamDetailsScreen = ({ route }) => {
   const presentItem = cartItems.filter((item) => item._id == iceCream._id);
 
   const favouriteItems = useSelector((state) => state.favourite.items);
-  console.log(favouriteItems);
-  // console.log(favouriteItems);
-  // console.log(presentItem);
+
   const handleAddToFavourite = () => {
     dispatch(addToFavorite(iceCream));
   };
@@ -80,7 +78,7 @@ const IceCreamDetailsScreen = ({ route }) => {
         />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back-outline" size={24} color="black" />
+            <Ionicons name="arrow-back-outline" size={24} color={color.pink} />
           </TouchableOpacity>
           <Text style={styles.headerText}>Strawberry</Text>
           {isFavouriteItem ? (
@@ -106,11 +104,7 @@ const IceCreamDetailsScreen = ({ route }) => {
             readonly={true}
           />
         </View>
-        <Text style={styles.description}>
-          {iceCream?.short_description} Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Praesentium, architecto officia doloribus adipisci
-          excepturi eveniet laudantium atque. Rem, debitis temporibus!
-        </Text>
+        <Text style={styles.description}>{iceCream?.short_description}</Text>
         <View style={styles.footer}>
           <View style={styles.priceContainer}>
             <Text style={styles.priceLabel}>Total Price</Text>
@@ -178,6 +172,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "500",
     fontSize: 22,
+    color: "white",
   },
   detailsContainer: {
     backgroundColor: "white",
@@ -201,6 +196,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     lineHeight: 18,
+    paddingTop: 5,
   },
   footer: {
     position: "absolute",

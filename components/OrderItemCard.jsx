@@ -12,8 +12,7 @@ const OrderItemCard = ({ item }) => {
     };
     getIceCreamByIdFromSanity();
   }, []);
-  //   console.log(iceCream[0], "from inside");
-  //   console.log(iceCream[0]?.price);
+
   return (
     <View style={{ flexDirection: "row", marginVertical: 8 }}>
       <View style={{ paddingRight: 20 }}>

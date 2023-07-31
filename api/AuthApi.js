@@ -9,7 +9,6 @@ import { auth } from "../firebaseConfig";
 
 export const signIn = async (email, password) => {
   try {
-    console.log(email, password);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -60,7 +59,6 @@ export const updateTheUserPhoneNumber = (number) => {
 export const onLogOut = async () => {
   try {
     const res = await signOut(auth);
-    console.log(res);
   } catch (error) {
     console.log(error);
   }

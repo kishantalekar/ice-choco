@@ -23,7 +23,7 @@ export const cartSlice = createSlice({
       const itemId = action.payload;
 
       const existingItem = state.items.find((item) => item._id === itemId);
-      console.log(existingItem);
+
       if (existingItem && existingItem.quantity > 1) {
         // If the item exists in the cart and quantity is more than 1, decrease the quantity
         existingItem.quantity -= 1;

@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 const FavouriteScreen = () => {
   const dispatch = useDispatch();
   const favouriteItems = useSelector((state) => state.favourite.items);
-  console.log(favouriteItems, "from favaorite ssveen");
+
   const navigation = useNavigation();
   return (
     <View

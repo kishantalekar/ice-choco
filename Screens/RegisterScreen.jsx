@@ -19,10 +19,14 @@ import {
 
 import { useDispatch } from "react-redux";
 import { currentUser } from "../features/authSlice";
+import { useToast } from "react-native-toast-notifications";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const toast = useToast();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
@@ -35,28 +39,30 @@ const RegisterScreen = () => {
   const handleSignUp = async () => {
     setLoading(true);
     try {
-      const user = await signUp(
+      const user = await createUserWithEmailAndPassword(
+        auth,
         form.email.toLowerCase(),
-        form.password.toLowerCase(),
-        form
+        form.password.toLowerCase()
       );
       if (user) {
         updateTheUserProfile(form.userName, form.imageUrl);
-        // updateTheUserPhoneNumber(form.number);
-      }
-      console.log(user, "from register screen");
-      if (user) {
-        const { email, uid } = user;
-        dispatch(currentUser({ email, uid }));
+        toast.show("Account has been created successfully", {
+          type: "success",
+        });
+        const { email, name, uid } = user;
+        dispatch(currentUser({ email, name, uid }));
         navigation.navigate("MainTab");
       } else {
-        alert("something went wrong");
+        // The signUp function returned null (Something went wrong during sign-up)
+        throw new Error("Something went wrong during sign-up");
       }
     } catch (error) {
+      toast.show(error.message, { type: "danger", placement: "center" });
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>Register</Text>
@@ -73,16 +79,6 @@ const RegisterScreen = () => {
         </View>
         <View style={styles.inputRow}>
           <View style={styles.inputItem}>
-            <Text style={styles.label}>Phone No</Text>
-            <TextInput
-              style={styles.input}
-              value={form.number}
-              onChangeText={(e) => setForm({ ...form, number: e })}
-            />
-          </View>
-        </View>
-        <View style={styles.inputRow}>
-          <View style={styles.inputItem}>
             <Text style={styles.label}>Email id</Text>
             <TextInput
               style={styles.input}
@@ -91,6 +87,8 @@ const RegisterScreen = () => {
               onChangeText={(e) => setForm({ ...form, email: e })}
             />
           </View>
+        </View>
+        <View style={styles.inputRow}>
           <View style={styles.inputItem}>
             <Text style={styles.label}>Password</Text>
             <TextInput
@@ -102,15 +100,16 @@ const RegisterScreen = () => {
         </View>
         <View style={styles.inputRow}>
           <View style={styles.inputItem}>
-            <Text style={styles.label}>Confirm password</Text>
+            <Text style={styles.label}>Phone No</Text>
             <TextInput
               style={styles.input}
-              value={form.confirmPassword}
-              onChangeText={(e) => setForm({ ...form, confirmPassword: e })}
+              value={form.number}
+              onChangeText={(e) => setForm({ ...form, number: e })}
             />
           </View>
         </View>
-        <View style={styles.inputRow}>
+
+        {/* <View style={styles.inputRow}>
           <View style={styles.inputItem}>
             <Text style={styles.label}>Image URL (optional)</Text>
             <TextInput
@@ -120,7 +119,7 @@ const RegisterScreen = () => {
               keyboardType="url"
             />
           </View>
-        </View>
+        </View> */}
         <View style={{ gap: 20, marginTop: 40 }}>
           <Button
             text={"Create account"}

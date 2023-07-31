@@ -27,7 +27,6 @@ const Header = ({ searchQuery, setSearchQuery }) => {
   };
   const cartItems = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.user.user);
-  // console.log(auth.currentUser);
 
   const getLocationAsync = async () => {
     setLoading(true);
@@ -45,9 +44,9 @@ const Header = ({ searchQuery, setSearchQuery }) => {
     try {
       const location = await Location.getCurrentPositionAsync(options);
       const { position } = location;
-      // console.log(location, "from position");
+
       const { latitude, longitude } = location.coords;
-      // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
       setLatitude(latitude);
       setLongitude(longitude);
       reverseGeocodeAsync(latitude, longitude);
@@ -67,10 +66,9 @@ const Header = ({ searchQuery, setSearchQuery }) => {
 
       if (response.length > 0) {
         const address = response[0];
-        // console.log("response", response);
+
         setLocation(address);
         setFormattedAddress(constructAddress(address));
-        // console.log("Address:", address);
       } else {
         console.log("No address found");
       }
@@ -106,8 +104,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
       console.log("faild in reloading");
     }
   };
-  console.log(formattedAddress);
-  console.log(location);
+
   return (
     <>
       <View style={styles.container}>
@@ -118,7 +115,12 @@ const Header = ({ searchQuery, setSearchQuery }) => {
               <Text style={styles.locationTitle}>Home</Text>
             </View>
             <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={styles.locationDescription}>{formattedAddress}</Text>
+              <Text style={styles.locationDescription}>
+                {formattedAddress.length > 25
+                  ? formattedAddress.substring(0, 25) + "..."
+                  : formattedAddress}{" "}
+                - {location?.postalCode}
+              </Text>
               <TouchableOpacity onPress={reloadAddress}>
                 <Ionicons name="reload" size={12} color={color.pink} />
               </TouchableOpacity>
@@ -126,7 +128,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
           </View>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-          {auth.currentUser == null ? (
+          {user == null ? (
             <TouchableOpacity
               onPress={() => navigation.navigate("Login")}
               style={{

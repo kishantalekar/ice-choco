@@ -24,7 +24,6 @@ const Categories = ({ refreshing }) => {
     if (refreshing) getCategoriesFromSanity();
   }, [refreshing]);
   const handleNavigation = (categoryId, name) => {
-    console.log(categoryId);
     navigation.navigate("IceCreamList", {
       id: categoryId,
       type: "category",
@@ -92,7 +91,7 @@ const Categories = ({ refreshing }) => {
           );
         })}
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{
           borderWidth: 0.8,
           borderColor: color.gray,
@@ -110,7 +109,7 @@ const Categories = ({ refreshing }) => {
           See More{" "}
         </Text>
         <Entypo name="chevron-small-down" size={26} color={color.gray} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

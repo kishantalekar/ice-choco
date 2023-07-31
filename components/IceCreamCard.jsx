@@ -46,7 +46,6 @@ const IceCreamCard = ({ ice }) => {
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(ice._id));
   };
-  console.log(ice);
 
   return (
     <TouchableOpacity

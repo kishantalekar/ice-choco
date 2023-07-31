@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { color } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 import { onLogOut } from "../api/AuthApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../features/authSlice";
 import { auth } from "../firebaseConfig";
 const ProfileScreen = () => {
@@ -17,7 +17,7 @@ const ProfileScreen = () => {
     dispatch(logOut());
     navigation.navigate("Home");
   };
-  console.log("\n\n\n", auth.currentUser);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <SafeAreaView style={styles.container}>

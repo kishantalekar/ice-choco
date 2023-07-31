@@ -49,10 +49,11 @@ const LoginScreen = () => {
     setLoginLoading(true);
     try {
       const user = await signIn(userName.toLowerCase(), password.toLowerCase());
-      const { email, uid } = user;
+
       setUserName("");
       setPassword("");
-      dispatch(currentUser({ email, uid }));
+      const { email, name, uid } = user;
+      dispatch(currentUser({ email, name, uid }));
     } catch (error) {
     } finally {
       setLoginLoading(false);
@@ -64,9 +65,10 @@ const LoginScreen = () => {
       // `user` will be null if the user is signed out
       // and will contain the user object if the user is signed in
       // setCurrentUser(user);
-      // console.log(user, "from authchanged");
-      // console.log(user, "from login screen");
+
       if (user) {
+        const { email, name, uid } = user;
+        dispatch(currentUser({ email, name, uid }));
         navigation.navigate("MainTab");
       }
     });

@@ -13,22 +13,24 @@ import Button from "./Button";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const PopularBrands = () => {
+const PopularBrands = ({ refreshing }) => {
   const [brands, setBrands] = useState([]);
   const navigation = useNavigation();
+  const getBrandsFromSanity = async () => {
+    try {
+      const data = await getBrands();
+      setBrands(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const getBrandsFromSanity = async () => {
-      try {
-        const data = await getBrands();
-        setBrands(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getBrandsFromSanity();
   }, []);
+  useEffect(() => {
+    if (refreshing) getBrandsFromSanity();
+  }, [refreshing]);
   const handleNavigation = (id, name) => {
-    console.log(id, name);
     navigation.navigate("IceCreamList", {
       id: id,
       type: "brand",

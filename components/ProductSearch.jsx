@@ -7,8 +7,6 @@ import { Entypo } from "@expo/vector-icons";
 import { color } from "../styles/colors";
 
 const ProductSearch = ({ iceCreams, searchQuery, loading, setLoading }) => {
-  console.log(iceCreams, "from inside");
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginHorizontal: 20, flex: 1 }}>
