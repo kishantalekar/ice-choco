@@ -28,6 +28,6 @@ app.post("/order-details", (req, res) => {
   res.status(200).send("Order fetched successfully");
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("server started");
 });
