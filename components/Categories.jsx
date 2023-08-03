@@ -1,4 +1,11 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { getCategories, urlFor } from "../sanity";
 import { color } from "../styles/colors";
@@ -42,13 +49,16 @@ const Categories = ({ refreshing }) => {
       >
         Variety of Ice Creams
       </Text>
-      <View
-        style={{
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginVertical: 10,
-        }}
+      <ScrollView
+        // style={{
+        //   flexWrap: "wrap",
+        //   flexDirection: "row",
+        //   justifyContent: "space-between",
+        //   marginVertical: 10,
+        // }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 5 }}
       >
         {categories?.map((category) => {
           return (
@@ -74,6 +84,9 @@ const Categories = ({ refreshing }) => {
                   width: "100%",
                   height: "100%",
                   borderRadius: 100,
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  borderColor: color.brightYellow,
                 }}
                 resizeMode="contain"
               />
@@ -90,7 +103,7 @@ const Categories = ({ refreshing }) => {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </ScrollView>
       {/* <TouchableOpacity
         style={{
           borderWidth: 0.8,

@@ -104,12 +104,14 @@ const Header = ({ searchQuery, setSearchQuery }) => {
       console.log("faild in reloading");
     }
   };
-
+  const handleLocation = () => {
+    navigation.navigate("LocationScreen");
+  };
   return (
     <>
       <View style={styles.container}>
         <View style={styles.locationContainer}>
-          <Ionicons name="location-outline" size={34} color={color.pink} />
+          <Ionicons name="location-outline" size={30} color={color.pink} />
           <View style={styles.locationTextContainer}>
             <View style={styles.locationRow}>
               <Text style={styles.locationTitle}>Home</Text>
@@ -121,8 +123,8 @@ const Header = ({ searchQuery, setSearchQuery }) => {
                   : formattedAddress}{" "}
                 - {location?.postalCode}
               </Text>
-              <TouchableOpacity onPress={reloadAddress}>
-                <Ionicons name="reload" size={12} color={color.pink} />
+              <TouchableOpacity onPress={handleLocation}>
+                <Ionicons name="chevron-down" size={16} color={color.pink} />
               </TouchableOpacity>
             </View>
           </View>

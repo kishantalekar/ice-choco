@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebaseConfig";
 import { addToCart, clearFromCart } from "../features/cartSlice";
 import { useToast } from "react-native-toast-notifications";
+import { sendOrderDetailsToNodejs } from "../api/nodejsApi";
 
 const CartScreen = () => {
   const [itemsTotal, setItemsTotal] = useState(0);
@@ -53,6 +54,7 @@ const CartScreen = () => {
         email: email,
         totalPrice: itemsTotal + 1 + 40,
       };
+      await sendOrderDetailsToNodejs(orderDetails);
       addOrder(orderDetails, setLoading);
       dispatch(clearFromCart());
       // navigation.navigate("MainTab");

@@ -18,6 +18,10 @@ import { auth } from "../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser } from "../features/authSlice";
 import { useToast } from "react-native-toast-notifications";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const LoginScreen = () => {
   const [usernameFocused, setUsernameFocused] = useState(false);
@@ -48,13 +52,21 @@ const LoginScreen = () => {
   const handleSignIn = async () => {
     setLoginLoading(true);
     try {
-      const user = await signIn(userName.toLowerCase(), password.toLowerCase());
-
-      setUserName("");
-      setPassword("");
-      const { email, name, uid } = user;
-      dispatch(currentUser({ email, name, uid }));
+      const user = await signInWithEmailAndPassword(
+        auth,
+        userName.toLowerCase(),
+        password.toLowerCase()
+      );
+      if (user) {
+        const { email, name, uid } = user;
+        dispatch(currentUser({ email, name, uid }));
+        setUserName("");
+        setPassword("");
+      }
     } catch (error) {
+      toast.show(error.code, {
+        type: "danger",
+      });
     } finally {
       setLoginLoading(false);
     }
@@ -80,7 +92,7 @@ const LoginScreen = () => {
   const user = useSelector((state) => state.user.user);
 
   return (
-    // <>
+    //  <>
     //   (
     //     <View
     //       style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
@@ -147,13 +159,13 @@ const LoginScreen = () => {
       )}
     </KeyboardAvoidingView>
     // )
-    /* <View style={styles.imageContainer}>
-        <Image
-          source={require("../assets/loginImage.jpg")}
-          style={styles.image}
-        />
-      </View> */
-    // </>
+    //  <View style={styles.imageContainer}>
+    //     <Image
+    //       source={require("../assets/loginImage.jpg")}
+    //       style={styles.image}
+    //     />
+    //   </View>
+    //  </>
     // );
   );
 };

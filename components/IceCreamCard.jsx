@@ -79,46 +79,48 @@ const IceCreamCard = ({ ice }) => {
             ? `${ice?.short_description.substring(0, 30)}...`
             : ice?.short_description}
         </Text>
-        <View style={styles.priceContainer}>
-          <Text style={styles.price}>
-            {"\u20B9"}
-            {ice?.price}
-          </Text>
-          {!isItemInCart ? (
-            <TouchableOpacity
-              style={{
-                paddingHorizontal: 10,
-                borderRadius: 10,
-                backgroundColor: "#ef71a0",
-                alignItems: "center",
-                paddingVertical: 4,
-                elevation: 10,
-              }}
-              onPress={handleAddToCart}
-            >
-              <Text style={{ color: "white", fontWeight: 500, fontSize: 18 }}>
-                Add to Cart
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <View style={styles.quantityContainer}>
+        <View>
+          <View style={styles.priceContainer}>
+            <Text style={styles.price}>
+              {"\u20B9"}
+              {ice?.price}
+            </Text>
+            {!isItemInCart ? (
               <TouchableOpacity
-                style={styles.quantityButton}
-                onPress={handleDecreement}
-              >
-                <Entypo name="minus" size={14} color={color.darkPink} />
-              </TouchableOpacity>
-              <Text style={styles.quantityText}>
-                {presentItem[0]?.quantity}
-              </Text>
-              <TouchableOpacity
-                style={styles.quantityButton}
+                style={{
+                  paddingHorizontal: 10,
+                  borderRadius: 10,
+                  backgroundColor: "#ef71a0",
+                  alignItems: "center",
+                  paddingVertical: 4,
+                  elevation: 10,
+                }}
                 onPress={handleAddToCart}
               >
-                <Entypo name="plus" size={14} color={color.darkPink} />
+                <Text style={{ color: "white", fontWeight: 500, fontSize: 18 }}>
+                  Add to Cart
+                </Text>
               </TouchableOpacity>
-            </View>
-          )}
+            ) : (
+              <View style={styles.quantityContainer}>
+                <TouchableOpacity
+                  style={styles.quantityButton}
+                  onPress={handleDecreement}
+                >
+                  <Entypo name="minus" size={14} color={color.darkPink} />
+                </TouchableOpacity>
+                <Text style={styles.quantityText}>
+                  {presentItem[0]?.quantity}
+                </Text>
+                <TouchableOpacity
+                  style={styles.quantityButton}
+                  onPress={handleAddToCart}
+                >
+                  <Entypo name="plus" size={14} color={color.darkPink} />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -127,11 +129,16 @@ const IceCreamCard = ({ ice }) => {
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 14,
+    elevation: 3,
     borderWidth: 0.8,
     borderColor: "white",
     backgroundColor: "white",
     borderRadius: 12,
+    flexDirection: "row",
+    paddingVertical: 10,
+    paddingLeft: 10,
+    marginLeft: 10,
+    marginRight: 5,
   },
   imageContainer: {
     height: 150,
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     backgroundColor: "gray",
     maxWidth: 160,
-    width: 200,
+    width: 180,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -154,6 +161,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10,
     gap: 10,
+    justifyContent: "space-between",
   },
   nameContainer: {
     flexDirection: "row",
