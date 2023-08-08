@@ -81,7 +81,11 @@ const LoginScreen = () => {
       if (user) {
         const { email, name, uid } = user;
         dispatch(currentUser({ email, name, uid }));
-        navigation.navigate("MainTab");
+        if (email == "frozenfactory123@gmail.com") {
+          navigation.navigate("AdminScreen");
+        } else {
+          navigation.navigate("MainTab");
+        }
       }
     });
     setLoading(false);

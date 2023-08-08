@@ -62,3 +62,43 @@ export const addFeedBack = async (feedback) => {
     console.log(error, "in feedback");
   }
 };
+
+export const getAllFeedbacks = async () => {
+  try {
+    const querySnapshot = await getDocs(feedbackRef);
+    let feedbacks = [];
+    querySnapshot.forEach((order) => {
+      feedbacks.push({ ...order.data(), id: order.id });
+    });
+
+    return feedbacks;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllOrders = async (emailId, setOrders) => {
+  try {
+    const querySnapshot = await getDocs(orderRef);
+
+    let orders = [];
+    querySnapshot.forEach((order) => {
+      orders.push({ ...order.data(), id: order.id });
+    });
+
+    // setOrders(orders);
+    return orders;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateOrderStatus = async (orderId, status) => {
+  try {
+    const orderDocRef = doc(db, "orders", orderId);
+    const data = await updateDoc(orderDocRef, { status: status });
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+};

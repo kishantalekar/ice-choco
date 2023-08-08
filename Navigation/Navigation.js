@@ -43,6 +43,8 @@ import FavouriteScreen from "../Screens/FavouriteScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import FeedbackScreen from "../Screens/FeedbackScreen";
 import LocationScreen from "../Screens/LocationScreen";
+import AdminScreen from "../Screens/AdminScreen";
+import AdminFeedbackScreen from "../Screens/AdminFeedbackScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -119,6 +121,11 @@ const Navigation = () => {
         <Stack.Screen name="AboutScreen" component={AboutScreen} />
         <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
         <Stack.Screen name="LocationScreen" component={LocationScreen} />
+        <Stack.Screen name="AdminScreen" component={AdminScreen} />
+        <Stack.Screen
+          name="AdminFeedbackScreen"
+          component={AdminFeedbackScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

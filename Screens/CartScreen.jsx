@@ -53,6 +53,7 @@ const CartScreen = () => {
         name: displayName,
         email: email,
         totalPrice: itemsTotal + 1 + 40,
+        status: "Pending",
       };
       await sendOrderDetailsToNodejs(orderDetails);
       addOrder(orderDetails, setLoading);

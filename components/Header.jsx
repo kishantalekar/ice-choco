@@ -71,6 +71,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
         setFormattedAddress(constructAddress(address));
       } else {
         console.log("No address found");
+        getLocationAsync();
       }
     } catch (error) {
       console.log("Error reverse geocoding:", error);

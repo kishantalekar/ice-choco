@@ -1,24 +1,38 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import OrderItemCard from "./OrderItemCard";
-import { AirbnbRating } from "react-native-ratings";
-import { color } from "../styles/colors";
-import { addRatingToOrders } from "../api/firebaseApi";
 
-const OrderCard = ({ order }) => {
+import { color } from "../styles/colors";
+import { addRatingToOrders, updateOrderStatus } from "../api/firebaseApi";
+import { Picker } from "@react-native-picker/picker";
+import RatingComponent from "./RatingComponent";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
+  const [selectedValue, setSelectedValue] = useState(
+    order?.status || "Pending"
+  );
+  // const [selectedValue, setSelectedValue] = useState("Approved");
+
   const handleRatingChange = (r) => {
     addRatingToOrders(order.id, r);
   };
+  const handleStatusChange = async (status) => {
+    const data = await updateOrderStatus(order.id, status);
+    setIsStatusChange((prev) => !prev);
+  };
   return (
     <View style={styles.container}>
+      {adminPage && (
+        <View style={{ paddingVertical: 10 }}>
+          <Text style={{ fontSize: 14, fontWeight: 400 }}>{order.email}</Text>
+        </View>
+      )}
       {/* Render order items */}
       {order?.items?.map((item) => (
         <OrderItemCard key={item.productId} item={item} />
       ))}
-
       {/* Horizontal line */}
       <View style={styles.horizontalLine} />
-
       {/* Order details */}
       <View style={styles.detailsContainer}>
         <Text style={styles.timeText}>{order?.time}</Text>
@@ -29,20 +43,136 @@ const OrderCard = ({ order }) => {
           </Text>
         </View>
       </View>
-
-      {/* Rating section */}
-      <View style={styles.ratingContainer}>
-        <AirbnbRating
-          onFinishRating={(r) => handleRatingChange(r)}
-          reviews={["Terrible", "Bad", "Average", "Good", "Excellent"]}
-          imageSize={15}
-          ratingColor={"pink"}
-          defaultRating={order?.rating || 0}
-          ratingBackgroundColor={"pink"}
-          size={15}
-        />
-        <Text style={styles.experienceText}>How was your Experience?</Text>
-      </View>
+      {adminPage && adminPage ? (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text
+            style={{ fontSize: 18, fontWeight: 400, fontFamily: "sans-serif" }}
+          >
+            Order status
+          </Text>
+          <View
+          // style={{ borderWidth: 1, borderColor: "gray", borderRadius: 5 }}
+          >
+            <Picker
+              selectedValue={selectedValue}
+              onValueChange={(itemValue, itemIndex) => {
+                setSelectedValue(itemValue);
+                handleStatusChange(itemValue);
+              }}
+              style={{ width: 150 }}
+            >
+              <Picker.Item label="Pending" value="Pending" />
+              <Picker.Item label="Approved" value="Approved" />
+              <Picker.Item label="Delivered" value="Delivered" />
+              {/* Add more Picker.Item components as needed */}
+            </Picker>
+          </View>
+        </View>
+      ) : selectedValue === "Pending" ? (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 10,
+          }}
+        >
+          <Text
+            style={{ fontSize: 16, fontWeight: 400, fontFamily: "sans-serif" }}
+          >
+            Order Status:
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <Ionicons name="timer-sharp" size={20} color={color.darkPink} />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "sans-serif",
+              }}
+            >
+              Pending
+            </Text>
+          </View>
+        </View>
+      ) : selectedValue === "Approved" ? (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 10,
+          }}
+        >
+          <Text
+            style={{ fontSize: 16, fontWeight: 400, fontFamily: "sans-serif" }}
+          >
+            Order Status:
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <Ionicons name="checkmark-circle" size={24} color={color.green} />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "sans-serif",
+              }}
+            >
+              Approved
+            </Text>
+          </View>
+        </View>
+      ) : (
+        <>
+          <View
+            style={{
+              marginTop: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+                fontWeight: 400,
+                fontFamily: "sans-serif",
+              }}
+            >
+              Order Status:
+            </Text>
+            <View
+              style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: 400,
+                  fontFamily: "sans-serif",
+                }}
+              >
+                Delivered
+              </Text>
+              <MaterialCommunityIcons
+                name="truck-check"
+                size={24}
+                color={color.blue}
+              />
+            </View>
+          </View>
+          <RatingComponent
+            rating={order?.rating}
+            handleRatingChange={handleRatingChange}
+          />
+        </>
+      )}
+      <View
+        style={{ borderTopWidth: 0.4, borderColor: color.gray, marginTop: 10 }}
+      ></View>
     </View>
   );
 };
