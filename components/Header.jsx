@@ -21,7 +21,9 @@ const Header = ({ searchQuery, setSearchQuery }) => {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState("");
   const [formattedAddress, setFormattedAddress] = useState("");
+
   const navigation = useNavigation();
+
   const handleNavigation = () => {
     navigation.navigate("Profile");
   };

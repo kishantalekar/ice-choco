@@ -4,7 +4,11 @@ import Header from "../components/Header";
 import CarouselComponent from "../components/CarouselComponent";
 import Categories from "../components/Categories";
 import PopularBrands from "../components/PopularBrands";
-import { getFeatureds, getIceCreamBySearchQuery } from "../sanity";
+import {
+  getCategories,
+  getFeatureds,
+  getIceCreamBySearchQuery,
+} from "../sanity";
 import FeaturedRow from "../components/FeaturedRow";
 import ProductSearch from "../components/ProductSearch";
 
@@ -16,20 +20,28 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRefresh = () => {
-    setRefreshing(true);
-    // Perform data fetching or any other operations you need here
-    // For example, you can fetch new data from an API, update state, etc.
-    getFeaturedsFromSanity();
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000); // You can set a delay to simulate the loading time
+    try {
+      setRefreshing(true);
+      // Perform data fetching or any other operations you need here
+      // For example, you can fetch new data from an API, update state, etc.
+      getFeaturedsFromSanity();
+      setTimeout(() => {
+        setRefreshing(false);
+      }, 2000); // You can set a delay to simulate the loading time
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getFeaturedsFromSanity = async () => {
-    const data = await getFeatureds();
-    setFeatured(data);
-  };
   useEffect(() => {
+    const getFeaturedsFromSanity = async () => {
+      try {
+        const data = await getFeatureds();
+        setFeatured(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getFeaturedsFromSanity();
   }, []);
 
@@ -56,7 +68,7 @@ const HomeScreen = () => {
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      {searchQuery.length > 0 ? (
+      {searchQuery && searchQuery.length > 0 ? (
         <ProductSearch
           iceCreams={searchResults}
           searchQuery={searchQuery}
@@ -76,7 +88,7 @@ const HomeScreen = () => {
           >
             <CarouselComponent refreshing={refreshing} />
             <Categories refreshing={refreshing} />
-            <PopularBrands refreshing={refreshing} />
+            <PopularBrands />
             {featured?.map((featured) => (
               <FeaturedRow key={featured?._id} featured={featured} />
             ))}

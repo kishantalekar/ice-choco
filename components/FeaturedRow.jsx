@@ -3,6 +3,7 @@ import React from "react";
 import IceCreamCard from "./IceCreamCard";
 
 const FeaturedRow = ({ featured }) => {
+  console.log(featured, "from featured");
   return (
     <View style={{ marginHorizontal: 20, marginVertical: 15, gap: 10 }}>
       <Text

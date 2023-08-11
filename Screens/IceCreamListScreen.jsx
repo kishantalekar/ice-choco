@@ -56,7 +56,7 @@ const IceCreamListScreen = ({ route }) => {
         </View>
 
         {/* <View style={{ flex: 1 }}> */}
-        {iceCreams?.length > 1 ? (
+        {iceCreams?.length > 0 ? (
           <ScrollView
             contentContainerStyle={{
               justifyContent: "space-between",

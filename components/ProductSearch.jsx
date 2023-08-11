@@ -19,7 +19,7 @@ const ProductSearch = ({ iceCreams, searchQuery, loading, setLoading }) => {
         >
           Search results for {searchQuery}
         </Text>
-        {iceCreams?.length > 1 ? (
+        {iceCreams?.length > 0 ? (
           <View
             style={{
               flexDirection: "row",

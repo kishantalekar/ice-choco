@@ -6,7 +6,7 @@ export const sendOrderDetailsToNodejs = async (orderDetails) => {
       "https://ice-choco.onrender.com/order-details",
       { order: orderDetails }
     );
-    console.log(result.data); // Corrected to access response data
+    // Corrected to access response data
   } catch (error) {
     console.log("Error sending order details to Node.js: ", error.message);
   }
