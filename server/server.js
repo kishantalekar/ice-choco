@@ -31,12 +31,11 @@ app.post("/order-details", (req, res) => {
 });
 
 const sanity = createClient({
-  projectId: "zetdffzm",
+  projectId: process.env.PROJECTID,
   dataset: "production",
   useCdn: true,
   apiVersion: "2022-08-12",
-  token:
-    "skvsrxXzz5OhlMqXu61SzdnXWZ4fDJ3w6UFUxmp35dJNy00nAU0VLUP9NuCWuHQIGUiVV2gspdQ0AIRN8GvfY9fiHvvdjGNsuUr2MiX1NAR4gvUBYV5RQKnjTxPsa4wqjLs9Brn1N4L71DvlryUvqXY3esxZviCZSl0i6x7L0XfynXn9wqST",
+  token: process.env.SANITY_TOKEN,
 });
 const builder = imageUrlBuilder(sanity);
 app.get("/get-ice-creams", async (req, res) => {
