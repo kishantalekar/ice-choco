@@ -98,6 +98,11 @@ const Navigation = () => {
           options={{ headerShown: false }}
         /> */}
         <Stack.Screen
+          name="MainTab"
+          component={MainTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -113,11 +118,6 @@ const Navigation = () => {
           options={{ headerShown: false }}
         />
 
-        <Stack.Screen
-          name="MainTab"
-          component={MainTabNavigator}
-          options={{ headerShown: false }}
-        />
         <Stack.Screen name="IceCreamList" component={IceCreamListScreen} />
         <Stack.Screen
           name="IceCreamDetails"

@@ -72,29 +72,28 @@ const LoginScreen = () => {
       setLoginLoading(false);
     }
   };
-  useEffect(() => {
-    // Subscribe to authentication state changes
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // `user` will be null if the user is signed out
-      // and will contain the user object if the user is signed in
-      // setCurrentUser(user);
+  // useEffect(() => {
+  //   // Subscribe to authentication state changes
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     // `user` will be null if the user is signed out
+  //     // and will contain the user object if the user is signed in
+  //     // setCurrentUser(user);
 
-      if (user) {
-        const { email, name, uid } = user;
-        dispatch(currentUser({ email, name, uid }));
-        if (email == "frozenfactory123@gmail.com") {
-          navigation.navigate("AdminScreen");
-        } else {
-          navigation.navigate("MainTab");
-        }
-      }
-    });
-    setLoading(false);
+  //     if (user) {
+  //       const { email, name, uid } = user;
+  //       dispatch(currentUser({ email, name, uid }));
+  //       if (email == "frozenfactory123@gmail.com") {
+  //         navigation.navigate("AdminScreen");
+  //       } else {
+  //         navigation.navigate("MainTab");
+  //       }
+  //     }
+  //   });
+  //   setLoading(false);
 
-    // Clean up the subscription when the component unmounts
-    return () => unsubscribe();
-  }, []);
-  const user = useSelector((state) => state.user.user);
+  //   // Clean up the subscription when the component unmounts
+  //   return () => unsubscribe();
+  // }, []);
 
   return (
     //  <>
