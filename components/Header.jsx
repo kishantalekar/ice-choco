@@ -68,7 +68,6 @@ const Header = ({ searchQuery, setSearchQuery }) => {
 
       if (response.length > 0) {
         const address = response[0];
-
         setLocation(address);
         setFormattedAddress(constructAddress(address));
       } else {
@@ -126,8 +125,8 @@ const Header = ({ searchQuery, setSearchQuery }) => {
                   : formattedAddress}{" "}
                 - {location?.postalCode}
               </Text>
-              <TouchableOpacity onPress={handleLocation}>
-                <Ionicons name="chevron-down" size={16} color={color.pink} />
+              <TouchableOpacity onPress={reloadAddress}>
+                <Ionicons name="reload" size={12} color={color.pink} />
               </TouchableOpacity>
             </View>
           </View>

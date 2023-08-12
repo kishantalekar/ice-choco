@@ -1,10 +1,12 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
 import { color } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 const LocationScreen = () => {
   const navigation = useNavigation();
+  const [address, setAddress] = useState("");
+  const handleAddressSave = async () => {};
   return (
     <View
       style={{
@@ -14,16 +16,24 @@ const LocationScreen = () => {
         backgroundColor: "white",
       }}
     >
-      <Text style={{ fontSize: 22, fontWeight: 500 }}>Search a location</Text>
+      <View style={{ flexDirection: "row", gap: 20 }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back-outline" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={{ fontSize: 22, fontWeight: 500 }}>
+          Specify your location
+        </Text>
+      </View>
+
       <View
         style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ marginRight: -30, zIndex: 2 }}
           onPress={() => navigation.goBack()}
         >
           <Entypo name="chevron-small-left" size={26} color={color.darkPink} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TextInput
           placeholder="Enter locaty or street name"
@@ -35,6 +45,8 @@ const LocationScreen = () => {
             flex: 1,
             paddingLeft: 35,
           }}
+          value={address}
+          onChangeText={(e) => setAddress(e)}
         />
       </View>
       <View

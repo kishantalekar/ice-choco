@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { getBrands } from "../sanity";
+import { getBrands, urlFor } from "../sanity";
 import { color } from "../styles/colors";
 
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +20,7 @@ const PopularBrands = ({ refreshing }) => {
     const getBrandsFromSanity = async () => {
       try {
         const data = await getBrands();
-        console.log(data, "from nodejs");
+
         setBrands(data);
       } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ const PopularBrands = ({ refreshing }) => {
     const getBrandsFromSanity = async () => {
       try {
         const data = await getBrands();
-        console.log(data, "from nodejs");
+
         setBrands(data);
       } catch (error) {
         console.log(error);
@@ -79,7 +79,7 @@ const PopularBrands = ({ refreshing }) => {
                 onPress={() => handleNavigation(brand?._id, brand?.name)}
               >
                 <Image
-                  source={{ uri: brand?.imageUrl }}
+                  source={{ uri: urlFor(brand?.image).url() }}
                   style={{
                     width: "90%",
                     height: "90%",

@@ -79,7 +79,7 @@ const Categories = ({ refreshing }) => {
               onPress={() => handleNavigation(category?._id, category.name)}
             >
               <Image
-                source={{ uri: category?.imageUrl }}
+                source={{ uri: urlFor(category?.image).url() }}
                 style={{
                   width: "100%",
                   height: "100%",

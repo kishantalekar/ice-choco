@@ -1,6 +1,5 @@
 import { createClient } from "@sanity/client";
 import ImageUrlBuilder from "@sanity/image-url";
-import axios from "axios";
 
 export const client = createClient({
   projectId: "zetdffzm",
@@ -14,29 +13,12 @@ export const client = createClient({
 const builder = ImageUrlBuilder(client);
 export const getCategories = async () => {
   try {
-    // const categories = await client.fetch(`
-    // *[_type == 'category']{
-    //     ...,
-    // }
-    // `);
-    const query = `
-            *[_type == 'category']{
-                ...,
-            }
-          `;
-    const res = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-ice-creams",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-    if (res && res.data.length > 0) {
-      return res.data;
-    } else {
-      return [];
+    const categories = await client.fetch(`
+    *[_type == 'category']{
+        ...,
     }
+    `);
+    return categories;
   } catch (error) {
     console.log(error);
   }
@@ -44,64 +26,27 @@ export const getCategories = async () => {
 
 export const getBrands = async () => {
   try {
-    // const categories = await client.fetch(`
-    // *[_type == 'brand']{
-    //     ...,
-    // }
-    // `);
-    const query = `
+    const categories = await client.fetch(`
     *[_type == 'brand']{
         ...,
     }
-    `;
-    let categories = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-ice-creams",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-    if (!categories || categories === undefined || categories.length == 0) {
-      return [];
-    }
-    return categories && categories?.data;
+    `);
+    return categories;
   } catch (error) {
     console.log(error);
   }
 };
 export const getFeatureds = async () => {
   try {
-    //     const featureds = await client.fetch(`
-    //        *[_type == "featured"] {
-    //       ...,
-    //       iceCream[]->{
-    //         ...,
-    //       }
-    //     }
-    //         `);
-    const query = `
-       *[_type == "featured"] {
-      ...,
-      iceCream[]->{
-        ...,
-      }
-    }
-        `;
-    const res = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-featureds",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-
-    if (res && res.data.length > 0) {
-      return res.data;
-    } else {
-      return [];
-    }
+    const featureds = await client.fetch(`
+           *[_type == "featured"] {
+          ...,
+          iceCream[]->{
+            ...,
+          }
+        }
+            `);
+    return featureds;
   } catch (error) {
     console.log(error);
   }
@@ -114,19 +59,7 @@ export const getImages = async () => {
       ...,
 
     }`);
-    const query = `
-     *[_type == "carousel"] {
-  ...,
 
-}`;
-    // const images = await axios.get(
-    //   "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-ice-creams",
-    //   {
-    //     params: {
-    //       query: query,
-    //     },
-    //   }
-    // );
     return images;
   } catch (error) {
     console.log(error);
@@ -135,30 +68,12 @@ export const getImages = async () => {
 
 export const getIceCreamByCategoryOrBrandID = async (type, id) => {
   try {
-    // const data = await client.fetch(`
-    //        *[_type == "iceCream" && ${type}._ref=="${id}"] {
-    //   ...,
-    // }
-    // `);
-    const query = `
+    const data = await client.fetch(`
            *[_type == "iceCream" && ${type}._ref=="${id}"] {
       ...,
     }
-    `;
-    const res = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-ice-creams",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-
-    if (res && res.data.length > 0) {
-      return res.data;
-    } else {
-      return [];
-    }
+    `);
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -166,74 +81,34 @@ export const getIceCreamByCategoryOrBrandID = async (type, id) => {
 
 export const getIceCreamBySearchQuery = async (query) => {
   try {
-    //     const data = await client.fetch(`
-    //     *[_type == 'iceCream' && (
+    const data = await client.fetch(`
+        *[_type == 'iceCream' && (
 
-    //   name match '${query}' ||
-    //   category->name match '${query}' ||
-    //   brand->name match '${query}' ||
-    //   name match '${query}' ||
-    //   category->name match '${query}' ||
-    //   brand->name match '${query}' ||
-    //   name match '${query}'
-    // )]`);
+      name match '${query}' ||
+      category->name match '${query}' ||
+      brand->name match '${query}' ||
+      name match '${query}' ||
+      category->name match '${query}' ||
+      brand->name match '${query}' ||
+      name match '${query}'
+    )]`);
 
-    const query = `
-    *[_type == 'iceCream' && (
-  
-  name match '${query}' ||
-  category->name match '${query}' ||
-  brand->name match '${query}' ||
-  name match '${query}' ||
-  category->name match '${query}' ||
-  brand->name match '${query}' ||
-  name match '${query}'
-)]`;
-
-    const res = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-featureds",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-    if (res && res.data.length > 0) {
-      return res.data;
-    } else {
-      return [];
-    }
+    return data;
   } catch (error) {
     console.log(error);
   }
 };
+
 export const getIceCreamById = async (id) => {
-  // const data = await client.fetch(`
-  // *[_type == 'iceCream' && _id == "${id}"]{
-  //   ...,
-  // }
-  // `);
   try {
-    const query = `
+    const data = await client.fetch(`
   *[_type == 'iceCream' && _id == "${id}"]{
     ...,
   }
-  `;
-    const res = await axios.get(
-      "https://f40f-2409-408c-8d81-2483-1918-b8ce-c556-3367.ngrok.io/get-featureds",
-      {
-        params: {
-          query: query,
-        },
-      }
-    );
-    if (res && res.data.length > 0) {
-      return res.data;
-    } else {
-      return [];
-    }
+  `);
   } catch (error) {
     console.log(error);
   }
 };
+
 export const urlFor = (source) => builder.image(source);

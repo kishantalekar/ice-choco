@@ -72,7 +72,10 @@ const IceCreamDetailsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: iceCream?.imageUrl }} style={styles.image} />
+        <Image
+          source={{ uri: urlFor(iceCream?.image).url() }}
+          style={styles.image}
+        />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back-outline" size={24} color={color.pink} />

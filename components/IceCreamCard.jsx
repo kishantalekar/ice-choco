@@ -20,14 +20,14 @@ const IceCreamCard = ({ ice }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const handleAddToCart = () => {
     try {
-      const { _id, brand, category, imageUrl, name, price, short_description } =
+      const { _id, brand, category, image, name, price, short_description } =
         ice;
       dispatch(
         addToCart({
           _id,
           brand,
           category,
-          imageUrl,
+          image,
           name,
           price,
           short_description,
@@ -53,7 +53,10 @@ const IceCreamCard = ({ ice }) => {
       onPress={() => handlePress()} // Call the onPressItem function when the component is clicked
     >
       <View style={styles.imageContainer}>
-        <Image source={{ uri: ice?.imageUrl }} style={styles.image} />
+        <Image
+          source={{ uri: urlFor(ice?.image).url() }}
+          style={styles.image}
+        />
       </View>
       <View style={styles.textContainer}>
         <View style={styles.nameContainer}>

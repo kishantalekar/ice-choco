@@ -22,7 +22,7 @@ const AdminScreen = () => {
     setLoading(true);
     try {
       const data = await getAllOrders();
-      //   console.log(data);
+
       setOrders(data);
     } catch (error) {
     } finally {
