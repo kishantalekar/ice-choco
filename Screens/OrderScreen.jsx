@@ -24,6 +24,7 @@ const OrderScreen = () => {
       setLoading(true);
       try {
         const data = await getOrders(email, setOrders);
+        console.log(orders, "fromorders");
       } catch (error) {
       } finally {
         setLoading(false);
@@ -65,7 +66,7 @@ const OrderScreen = () => {
         </View>
       ) : (
         <>
-          {orders?.length == 0 ? (
+          {orders && orders?.length == 0 ? (
             <View
               style={{
                 flex: 1,
@@ -85,9 +86,10 @@ const OrderScreen = () => {
             </View>
           ) : (
             <ScrollView showsVerticalScrollIndicator={false}>
-              {orders?.map((order) => (
-                <OrderCard key={order.id} order={order} />
-              ))}
+              {orders &&
+                orders?.map((order) => (
+                  <OrderCard key={order.id} order={order} />
+                ))}
             </ScrollView>
           )}
         </>

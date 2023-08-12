@@ -22,6 +22,7 @@ import { currentUser } from "../features/authSlice";
 import { useToast } from "react-native-toast-notifications";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { addUserDetails } from "../api/firebaseApi";
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -34,10 +35,21 @@ const RegisterScreen = () => {
     userName: "",
     number: "",
     confirmPassword: "",
-    imageUrl: "",
+    address: "",
   });
   const handleSignUp = async () => {
     setLoading(true);
+    if (
+      form.userName === "" ||
+      form.number === "" ||
+      form.address === "" ||
+      form.email === ""
+    ) {
+      return alert("Fields cant be empty");
+    }
+    if (!form.number.length === 10) {
+      return alert("Mobile number  must be of 10 digits ");
+    }
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
@@ -50,11 +62,22 @@ const RegisterScreen = () => {
           type: "success",
         });
         const { email, name, uid } = user;
+        const userDetails = {
+          userName: form.userName,
+          email: form.email,
+          number: form.number,
+          address: form.address,
+        };
+        const updateUsers = await addUserDetails(userDetails);
+
         dispatch(currentUser({ email, name, uid }));
         navigation.navigate("MainTab");
       } else {
         // The signUp function returned null (Something went wrong during sign-up)
-        throw new Error("Something went wrong during sign-up");
+        toast.show("Something went wrong during sign-up", {
+          type: "danger",
+          placement: "center",
+        });
       }
     } catch (error) {
       toast.show(error.message, { type: "danger", placement: "center" });
@@ -105,21 +128,22 @@ const RegisterScreen = () => {
               style={styles.input}
               value={form.number}
               onChangeText={(e) => setForm({ ...form, number: e })}
+              keyboardType="numeric"
             />
           </View>
         </View>
 
-        {/* <View style={styles.inputRow}>
+        <View style={styles.inputRow}>
           <View style={styles.inputItem}>
-            <Text style={styles.label}>Image URL (optional)</Text>
+            <Text style={styles.label}>Address</Text>
             <TextInput
               style={styles.input}
-              value={form.imageUrl}
-              onChangeText={(e) => setForm({ ...form, imageUrl: e })}
+              value={form.address}
+              onChangeText={(e) => setForm({ ...form, address: e })}
               keyboardType="url"
             />
           </View>
-        </View> */}
+        </View>
         <View style={{ gap: 20, marginTop: 40 }}>
           <Button
             text={"Create account"}
@@ -156,7 +180,7 @@ const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 70,
+    paddingTop: 40,
     paddingHorizontal: 25,
     backgroundColor: "white",
   },
@@ -183,7 +207,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    padding: 10,
+    padding: 8,
     borderColor: color.blue,
     borderWidth: 1,
     borderRadius: 13,

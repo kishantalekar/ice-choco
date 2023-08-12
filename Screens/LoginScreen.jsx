@@ -8,6 +8,7 @@ import {
   Platform,
   StyleSheet,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { color } from "../styles/colors";
@@ -155,6 +156,20 @@ const LoginScreen = () => {
             styles={styles.registerButton}
             handlePress={() => navigation.navigate("Register")}
           />
+          <TouchableOpacity
+            style={{ alignItems: "center", paddingTop: 20 }}
+            onPress={() => navigation.navigate("MainTab")}
+          >
+            <Text
+              style={{
+                color: "gray",
+                fontWeight: 400,
+                fontFamily: "sans-serif",
+              }}
+            >
+              Skip for now{" "}
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <View style={{ justifyContent: "center", flex: 1 }}>

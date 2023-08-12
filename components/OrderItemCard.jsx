@@ -20,6 +20,7 @@ const OrderItemCard = ({ item }) => {
           <Image
             source={{ uri: urlFor(iceCream[0]?.image).url() }}
             style={{ width: 40, height: 40, borderRadius: 10 }}
+            resizeMode="cover"
           />
         )}
       </View>
@@ -27,17 +28,27 @@ const OrderItemCard = ({ item }) => {
         style={{
           flexDirection: "row",
           flex: 1,
-
           alignItems: "center",
           gap: 15,
         }}
       >
-        <Text style={{ fontWeight: "bold", textTransform: "capitalize" }}>
+        <Text
+          style={{
+            fontWeight: 400,
+            textTransform: "capitalize",
+            fontSize: 12,
+            fontFamily: "sans-serif",
+          }}
+        >
           {iceCream[0]?.name}
         </Text>
-        <FontAwesome name="remove" size={10} color="gray" />
-        <Text style={{ flex: 1, color: "gray" }}>{item.quantity}</Text>
-        <Text>
+        <FontAwesome name="remove" size={8} color="gray" />
+        <Text style={{ flex: 1, color: "gray", fontSize: 10 }}>
+          {item.quantity}
+        </Text>
+        <Text
+          style={{ fontSize: 12, fontFamily: "sans-serif", fontWeight: "bold" }}
+        >
           {"\u20B9"}
           {iceCream[0]?.price * item?.quantity}
         </Text>

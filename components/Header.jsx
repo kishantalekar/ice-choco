@@ -10,9 +10,10 @@ import { useState, useEffect } from "react";
 import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
 import { color } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebaseConfig";
 import * as Location from "expo-location";
+import { addLocation } from "../features/locationSlice";
 
 const Header = ({ searchQuery, setSearchQuery }) => {
   const [imageSource, setImageSource] = useState(auth?.currentUser?.photoURL);
@@ -21,6 +22,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState("");
   const [formattedAddress, setFormattedAddress] = useState("");
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
 
@@ -68,8 +70,10 @@ const Header = ({ searchQuery, setSearchQuery }) => {
 
       if (response.length > 0) {
         const address = response[0];
+
         setLocation(address);
         setFormattedAddress(constructAddress(address));
+        dispatch(addLocation(address));
       } else {
         console.log("No address found");
         getLocationAsync();
@@ -121,7 +125,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
             <View style={{ flexDirection: "row", gap: 5 }}>
               <Text style={styles.locationDescription}>
                 {formattedAddress.length > 25
-                  ? formattedAddress.substring(0, 25) + "..."
+                  ? formattedAddress.substring(0, 20) + "..."
                   : formattedAddress}{" "}
                 - {location?.postalCode}
               </Text>
@@ -136,15 +140,22 @@ const Header = ({ searchQuery, setSearchQuery }) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("Login")}
               style={{
-                // borderColor: color.pink,
-                // borderWidth: 0.8,
                 backgroundColor: color.pink,
-                paddingVertical: 6,
-                paddingHorizontal: 10,
                 borderRadius: 10,
               }}
             >
-              <Text style={{ fontSize: 18, color: "white" }}>login</Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "white",
+                  fontFamily: "sans-serif",
+                  padding: 5,
+                  paddingHorizontal: 10,
+                  paddingVertical: 10,
+                }}
+              >
+                Login
+              </Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity onPress={handleNavigation}>
@@ -258,12 +269,12 @@ const styles = StyleSheet.create({
   },
   locationTitle: {
     color: color.pink,
-    fontWeight: "600",
-    fontSize: 18,
+    fontWeight: "bold",
+    fontSize: 16,
   },
   locationDescription: {
     color: color.pink,
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "400",
   },
   profileImage: {

@@ -56,11 +56,12 @@ const IceCreamCard = ({ ice }) => {
         <Image
           source={{ uri: urlFor(ice?.image).url() }}
           style={styles.image}
+          resizeMode="contain"
         />
       </View>
       <View style={styles.textContainer}>
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>{ice?.name}</Text>
+          <Text style={styles.name}>{ice?.name.substring(0, 12)}</Text>
           <View
             style={[
               styles.ratingContainer,
@@ -77,7 +78,7 @@ const IceCreamCard = ({ ice }) => {
         <Text style={styles.description}>
           {ice?.short_description.length > 30
             ? `${ice?.short_description.substring(0, 30)}...`
-            : ice?.short_description}
+            : ice?.short_description}{" "}
         </Text>
         <View>
           <View style={styles.priceContainer}>
@@ -97,7 +98,14 @@ const IceCreamCard = ({ ice }) => {
                 }}
                 onPress={handleAddToCart}
               >
-                <Text style={{ color: "white", fontWeight: 500, fontSize: 18 }}>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: 400,
+                    fontSize: 12,
+                    fontFamily: "sans-serif",
+                  }}
+                >
                   Add to Cart
                 </Text>
               </TouchableOpacity>
@@ -137,16 +145,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 10,
     paddingLeft: 10,
-    marginLeft: 10,
-    marginRight: 5,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
   },
   imageContainer: {
-    height: 150,
+    width: 120,
+    height: 120,
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: "gray",
-    maxWidth: 160,
-    width: 180,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -169,11 +176,12 @@ const styles = StyleSheet.create({
   },
   name: {
     textTransform: "capitalize",
-    fontWeight: "600",
-    fontSize: 16,
+    fontWeight: 400,
+    fontSize: 14,
+    fontFamily: "sans-serif",
   },
   ratingContainer: {
-    paddingHorizontal: 3,
+    paddingHorizontal: 4,
     borderRadius: 4,
     flexDirection: "row",
     alignItems: "center",
@@ -182,23 +190,27 @@ const styles = StyleSheet.create({
   ratingText: {
     color: "white",
     fontWeight: "600",
-    fontSize: 12,
+    fontSize: 10,
   },
   description: {
     color: color.gray,
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "400",
-    maxWidth: 160,
+    maxWidth: 200,
+    fontFamily: "sans-serif",
+    width: 150,
   },
   priceContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
+    gap: 10,
   },
   price: {
     color: "#ef71a0",
-    fontWeight: 500,
-    fontSize: 18,
+    fontWeight: 400,
+    fontSize: 12,
+    fontFamily: "sans-serif",
   },
   addToCartButton: {
     padding: 4,
@@ -207,6 +219,8 @@ const styles = StyleSheet.create({
   },
   addToCartText: {
     color: "white",
+    fontSize: 12,
+    fontFamily: "sans-serif",
   },
   quantityContainer: {
     flexDirection: "row",

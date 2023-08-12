@@ -45,6 +45,8 @@ import FeedbackScreen from "../Screens/FeedbackScreen";
 import LocationScreen from "../Screens/LocationScreen";
 import AdminScreen from "../Screens/AdminScreen";
 import AdminFeedbackScreen from "../Screens/AdminFeedbackScreen";
+import WaitingScreen from "../Screens/WaitingScreen";
+import EditProfileScreen from "../Screens/EditProfileScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +93,11 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
+          name="Waiting"
+          component={WaitingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -126,6 +133,7 @@ const Navigation = () => {
           name="AdminFeedbackScreen"
           component={AdminFeedbackScreen}
         />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

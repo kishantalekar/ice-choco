@@ -1,6 +1,12 @@
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
-import { SliderBox } from "react-native-image-slider-box";
 import { color } from "../styles/colors";
 import { getImages, urlFor } from "../sanity";
 
@@ -22,46 +28,52 @@ const CarouselComponent = ({ refreshing }) => {
     if (refreshing) getImagesFromSanity();
   });
   return (
-    <View style={{ height: 200, marginBottom: 20 }}>
-      {sanityImages?.length > 0 && (
-        <SliderBox
-          images={sanityImages?.map((image) => ({
-            uri: urlFor(image.image).url(),
-          }))}
-          // onCurrentImagePressed={(index) => console.warn(`image ${index} pressed`)}
-          // currentImageEmitter={(index) => console.warn(`current pos is: ${index}`)}
-          sliderBoxHeight={200}
-          dotColor={color.pink}
-          inactiveDotColor="#90A4AE"
-          resizeMethod={"resize"}
-          resizeMode={"contain"}
-          paginationBoxStyle={{
-            position: "absolute",
-            bottom: 0,
-            padding: 0,
-            alignItems: "center",
-            alignSelf: "center",
-            justifyContent: "center",
-            paddingVertical: 10,
-          }}
-          dotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 0,
-            padding: 0,
-            margin: 0,
-            backgroundColor: "rgba(128, 128, 128, 0.92)",
-          }}
-          ImageComponentStyle={{
-            borderRadius: 15,
-            width: "90%",
-            marginTop: 5,
-            // marginBottom: 10,
-          }}
-          imageLoadingColor="#2196F3"
-        />
-      )}
+    <View style={{ height: 200, marginBottom: 20, flex: 1 }}>
+      <ScrollView
+        // style={{
+        //   flexWrap: "wrap",
+        //   flexDirection: "row",
+        //   justifyContent: "space-between",
+        //   marginVertical: 10,
+        // }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 5 }}
+      >
+        {sanityImages?.map((image) => {
+          return (
+            <TouchableOpacity
+              key={image._id}
+              style={{
+                width: 250,
+                height: 150,
+                borderRadius: 200,
+                margin: 10,
+                // backgroundColor: "green",
+                marginBottom: 20,
+                gap: 4,
+                // borderColor: color.brightYellow,
+                // borderWidth: 0.8,
+                elevation: 1,
+              }}
+              // onPress={() => handleNavigation(category?._id, category.name)}
+            >
+              <Image
+                source={{ uri: urlFor(image?.image).url() }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  // borderRadius: 100,
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: color.darkPink,
+                }}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };

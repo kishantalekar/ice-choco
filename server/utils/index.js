@@ -9,6 +9,7 @@ function formatOrderDetails(orderData) {
 - Time: ${time}
 - Name: ${name || "Kishan"}
 - Email: ${email}
+- Address: ${address}
 - Items:\n${formattedItems}
 - Total Price: ${totalPrice}`;
 

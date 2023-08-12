@@ -20,11 +20,20 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
     const data = await updateOrderStatus(order.id, status);
     setIsStatusChange((prev) => !prev);
   };
+
   return (
     <View style={styles.container}>
       {adminPage && (
         <View style={{ paddingVertical: 10 }}>
-          <Text style={{ fontSize: 14, fontWeight: 400 }}>{order.email}</Text>
+          <Text
+            style={{
+              fontSize: 11,
+              fontWeight: "bold",
+              fontFamily: "sans-serif",
+            }}
+          >
+            {order.email}
+          </Text>
         </View>
       )}
       {/* Render order items */}
@@ -37,25 +46,56 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
       <View style={styles.detailsContainer}>
         <Text style={styles.timeText}>{order?.time}</Text>
         <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>Total: </Text>
+          <Text
+            style={{
+              fontWeight: 400,
+              fontSize: 14,
+              fontFamily: "sans-serif",
+            }}
+          >
+            Total:{" "}
+          </Text>
           <Text style={styles.totalPriceText}>
             {"\u20B9"} {order?.totalPrice}
           </Text>
         </View>
       </View>
       {adminPage && adminPage ? (
+        order?.address && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 10,
+              gap: 10,
+            }}
+          >
+            <Text style={{ fontSize: 10, fontFamily: "sans-serif" }}>
+              Address:
+            </Text>
+            <Text
+              style={{ fontSize: 8, fontFamily: "sans-serif", fontWeight: 400 }}
+            >
+              {order.address.substring(0, 30)}
+            </Text>
+          </View>
+        )
+      ) : (
+        <></>
+      )}
+      {adminPage && adminPage ? (
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: 10,
+            marginTop: 5,
           }}
         >
           <Text
-            style={{ fontSize: 18, fontWeight: 400, fontFamily: "sans-serif" }}
+            style={{ fontSize: 14, fontWeight: 400, fontFamily: "sans-serif" }}
           >
-            Order status
+            Order Status
           </Text>
           <View
           // style={{ borderWidth: 1, borderColor: "gray", borderRadius: 5 }}
@@ -68,9 +108,33 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
               }}
               style={{ width: 150 }}
             >
-              <Picker.Item label="Pending" value="Pending" />
-              <Picker.Item label="Approved" value="Approved" />
-              <Picker.Item label="Delivered" value="Delivered" />
+              <Picker.Item
+                label="Pending"
+                value="Pending"
+                style={{
+                  fontSize: 12,
+                  fontFamily: "sans-serif",
+                  fontWeight: 400,
+                }}
+              />
+              <Picker.Item
+                label="Approved"
+                value="Approved"
+                style={{
+                  fontSize: 12,
+                  fontFamily: "sans-serif",
+                  fontWeight: 400,
+                }}
+              />
+              <Picker.Item
+                label="Delivered"
+                value="Delivered"
+                style={{
+                  fontSize: 12,
+                  fontFamily: "sans-serif",
+                  fontWeight: 400,
+                }}
+              />
               {/* Add more Picker.Item components as needed */}
             </Picker>
           </View>
@@ -84,7 +148,7 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
           }}
         >
           <Text
-            style={{ fontSize: 16, fontWeight: 400, fontFamily: "sans-serif" }}
+            style={{ fontSize: 14, fontWeight: 400, fontFamily: "sans-serif" }}
           >
             Order Status:
           </Text>
@@ -92,7 +156,7 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
             <Ionicons name="timer-sharp" size={20} color={color.darkPink} />
             <Text
               style={{
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: 400,
                 fontFamily: "sans-serif",
               }}
@@ -110,7 +174,7 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
           }}
         >
           <Text
-            style={{ fontSize: 16, fontWeight: 400, fontFamily: "sans-serif" }}
+            style={{ fontSize: 14, fontWeight: 400, fontFamily: "sans-serif" }}
           >
             Order Status:
           </Text>
@@ -150,7 +214,7 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
             >
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: 400,
                   fontFamily: "sans-serif",
                 }}
@@ -164,10 +228,10 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
               />
             </View>
           </View>
-          <RatingComponent
+          {/* <RatingComponent
             rating={order?.rating}
             handleRatingChange={handleRatingChange}
-          />
+          /> */}
         </>
       )}
       <View
@@ -188,6 +252,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: "white",
     elevation: 10,
+    marginHorizontal: 10,
   },
   horizontalLine: {
     borderBottomColor: "gray",
@@ -201,10 +266,11 @@ const styles = StyleSheet.create({
   timeText: {
     color: "gray",
     fontWeight: "400",
-    fontSize: 15,
+    fontSize: 10,
+    fontFamily: "sans-serif",
   },
   totalPriceText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 400,
   },
   ratingContainer: {

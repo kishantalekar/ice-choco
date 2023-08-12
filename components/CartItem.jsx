@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   imageContainer: {
-    width: 150,
+    width: 100,
     height: 100,
   },
   image: {
@@ -109,16 +109,16 @@ const styles = StyleSheet.create({
   },
   name: {
     textTransform: "capitalize",
-    fontWeight: "400",
-    fontSize: 20,
+    fontWeight: 400,
+    fontSize: 10,
   },
   ml: {
     color: "gray",
-    fontSize: 14,
+    fontSize: 10,
   },
   price: {
     color: color.pink,
-    fontSize: 18,
+    fontSize: 12,
   },
   actionsContainer: {
     justifyContent: "space-between",
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   removeButtonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 12,
   },
   quantityContainer: {
     flexDirection: "row",
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   quantityText: {
-    fontSize: 16,
+    fontSize: 12,
   },
 });
 

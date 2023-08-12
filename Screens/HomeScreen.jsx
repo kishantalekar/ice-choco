@@ -11,6 +11,7 @@ import {
 } from "../sanity";
 import FeaturedRow from "../components/FeaturedRow";
 import ProductSearch from "../components/ProductSearch";
+import { BackHandler, Alert } from "react-native";
 
 const HomeScreen = () => {
   const [featured, setFeatured] = useState([]);
@@ -20,6 +21,14 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRefresh = () => {
+    const getFeaturedsFromSanity = async () => {
+      try {
+        const data = await getFeatureds();
+        setFeatured(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     try {
       setRefreshing(true);
       // Perform data fetching or any other operations you need here
@@ -64,6 +73,32 @@ const HomeScreen = () => {
 
     getSearchResults();
   }, [searchQuery]);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        "Exit App",
+        "Are you sure you want to exit?",
+        [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "Exit", onPress: () => BackHandler.exitApp() },
+        ],
+        { cancelable: false }
+      );
+      return true; // Prevent default back behavior
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove(); // Clean up when the component is unmounted
+  }, []);
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>

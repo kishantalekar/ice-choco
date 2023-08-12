@@ -29,7 +29,7 @@ const AdminFeedbackScreen = () => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back-outline" size={24} color="black" />
         </TouchableOpacity>
-        <Text style={{ fontSize: 20, fontWeight: 400 }}>
+        <Text style={{ fontSize: 16, fontWeight: 400 }}>
           Feedbacks from customers{" "}
         </Text>
       </View>
@@ -53,7 +53,7 @@ const AdminFeedbackScreen = () => {
                   gap: 10,
                 }}
               >
-                <Text style={{ color: color.gray, fontSize: 14 }}>
+                <Text style={{ color: color.gray, fontSize: 12 }}>
                   {feedback.feedback.email}
                 </Text>
                 <View
@@ -66,7 +66,7 @@ const AdminFeedbackScreen = () => {
                   {/* <Text style={{ fontSize: 14 }}>Feedback:</Text> */}
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: 400,
                       fontFamily: "sans-serif",
                     }}

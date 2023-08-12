@@ -52,13 +52,13 @@ const FeedbackScreen = () => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back-outline" size={24} color="black" />
         </TouchableOpacity>
-        <Text style={{ fontWeight: "bold", fontSize: 22 }}>Feedback</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>Feedback</Text>
       </View>
       <View style={{ gap: 10 }}>
         <Text
           style={{
             fontWeight: 400,
-            fontSize: 18,
+            fontSize: 14,
             textAlign: "center",
             marginVertical: 20,
           }}
@@ -90,9 +90,9 @@ const FeedbackScreen = () => {
               onPress={handleFeedback}
               style={{
                 backgroundColor: color.darkPink,
-                width: 100,
-                paddingVertical: 10,
-                paddingHorizontal: 4,
+                // width: 150,
+                // paddingVertical: 10,
+                // paddingHorizontal: 4,
                 borderRadius: 15,
               }}
             >
@@ -100,7 +100,12 @@ const FeedbackScreen = () => {
                 <ActivityIndicator color={"white"} />
               ) : (
                 <Text
-                  style={{ color: "white", fontSize: 14, fontWeight: "bold" }}
+                  style={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    padding: 10,
+                  }}
                 >
                   Submit feedback
                 </Text>
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 10,
-    fontSize: 16,
+    fontSize: 12,
     marginBottom: 10,
     textAlignVertical: "top",
     borderRadius: 10,

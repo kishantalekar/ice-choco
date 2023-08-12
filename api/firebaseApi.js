@@ -2,6 +2,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -14,6 +15,26 @@ let userRef = collection(db, "user");
 let orderRef = collection(db, "orders");
 let feedbackRef = collection(db, "feedback");
 
+export const addUserDetails = async (userDetails) => {
+  try {
+    const data = await addDoc(userRef, { ...userDetails });
+    return true;
+  } catch (error) {
+    return error;
+  }
+};
+export const getUserDetails = async (email) => {
+  const userQuery = query(
+    userRef,
+    where("email", "==", "Kishantalekar123456@gmail.com")
+  );
+  let user = [];
+  const userSnapshot = await getDocs(userQuery);
+  userSnapshot.forEach((user) => {
+    user.push({ ...user.data() });
+  });
+  return user;
+};
 export const addOrder = (orderDetails, setLoading) => {
   addDoc(orderRef, orderDetails)
     .then((docRef) => {

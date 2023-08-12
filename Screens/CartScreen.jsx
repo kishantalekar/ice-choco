@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { color } from "../styles/colors";
 import CartItem from "../components/CartItem";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,10 +21,12 @@ import { auth } from "../firebaseConfig";
 import { addToCart, clearFromCart } from "../features/cartSlice";
 import { useToast } from "react-native-toast-notifications";
 import { sendOrderDetailsToNodejs } from "../api/nodejsApi";
+import CurrentLocation from "../components/CurrentLocation";
 
 const CartScreen = () => {
   const [itemsTotal, setItemsTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState("");
   const cartItems = useSelector((state) => state.cart.items);
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ const CartScreen = () => {
         email: email,
         totalPrice: itemsTotal + 1 + 40,
         status: "Pending",
+        address: address || "near karwar ,581328",
       };
       await sendOrderDetailsToNodejs(orderDetails);
       addOrder(orderDetails, setLoading);
@@ -75,12 +78,34 @@ const CartScreen = () => {
     }));
   };
 
+  const location = useSelector((state) => state?.location?.location);
+
+  useEffect(() => {
+    const extractAddressInfo = (address) => {
+      const { district, city, postalCode } = address;
+      const addressParts = [];
+
+      if (district) {
+        addressParts.push(district);
+      }
+      if (city) {
+        addressParts.push(city);
+      }
+      if (postalCode) {
+        addressParts.push(postalCode);
+      }
+
+      return addressParts.join(", ");
+    };
+    setAddress(extractAddressInfo(location));
+  }, []);
+
   return (
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Entypo name="chevron-small-left" size={24} color="black" />
+            <Entypo name="chevron-small-left" size={28} color="black" />
           </TouchableOpacity>
           <Text style={styles.title}>Your Cart</Text>
         </View>
@@ -103,12 +128,19 @@ const CartScreen = () => {
                 ))}
               </View>
 
-              <View style={{ flex: 1, marginTop: 20, gap: 10 }}>
+              <View
+                style={{
+                  flex: 1,
+                  marginTop: 20,
+                  gap: 10,
+                  marginHorizontal: 5,
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontWeight: 500,
-                    fontSize: 18,
+                    fontSize: 14,
                     color: "gray",
                   }}
                 >
@@ -117,17 +149,17 @@ const CartScreen = () => {
                 <View style={styles.billSummaryContainer}>
                   <View style={styles.billSummaryRow}>
                     <View>
-                      <Text style={{ fontWeight: 500, fontSize: 20 }}>
+                      <Text style={{ fontWeight: 400, fontSize: 12 }}>
                         item total
                       </Text>
                       <Text
-                        style={{ fontSize: 12, color: "gray", fontWeight: 500 }}
+                        style={{ fontSize: 8, color: "gray", fontWeight: 400 }}
                       >
                         Includes 1rs to feeding indian donation{" "}
                       </Text>
                     </View>
                     <View>
-                      <Text>
+                      <Text style={{ fontFamily: "sans-serif", fontSize: 10 }}>
                         {" "}
                         {"\u20B9"}
                         {itemsTotal + 1}
@@ -136,34 +168,97 @@ const CartScreen = () => {
                   </View>
                   <View style={styles.billSummaryRow}>
                     <View>
-                      <Text style={{ fontWeight: 500, fontSize: 18 }}>
+                      <Text style={{ fontWeight: 500, fontSize: 12 }}>
                         Delivery charges
                       </Text>
                       <Text
-                        style={{ fontSize: 12, color: "gray", fontWeight: 500 }}
+                        style={{ fontSize: 10, color: "gray", fontWeight: 500 }}
                       >
                         fully goes to them for their time and effort
                       </Text>
                     </View>
-                    <View>
-                      <Text> {"\u20B9"}40</Text>
+                    <View
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 400,
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 400,
+                          fontFamily: "sans-serif",
+                        }}
+                      >
+                        {" "}
+                        {"\u20B9"}40
+                      </Text>
                     </View>
                   </View>
                   <View style={styles.billSummaryRow}>
-                    <Text style={{ fontWeight: 500, fontSize: 18 }}>
+                    <View>
+                      <Text style={{ fontWeight: 500, fontSize: 12 }}>
+                        Address
+                      </Text>
+                      <Text
+                        style={{ fontSize: 10, color: "gray", fontWeight: 500 }}
+                      >
+                        {address}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 400,
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 400,
+                          fontFamily: "sans-serif",
+                        }}
+                      >
+                        {" "}
+                        {"\u20B9"}40
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.billSummaryRow}>
+                    <Text style={{ fontWeight: "bold", fontSize: 13 }}>
                       Grand Total
                     </Text>
-                    <Text>
+                    <Text
+                      style={{
+                        fontSize: 11,
+                        fontWeight: "bold",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
                       {"\u20B9"}
                       {itemsTotal + 1 + 40}
                     </Text>
                   </View>
                 </View>
               </View>
-              <View style={{ marginTop: 20, marginBottom: 20, gap: 10 }}>
+              <View
+                style={{
+                  marginTop: 20,
+                  marginBottom: 20,
+                  gap: 10,
+                  marginHorizontal: 5,
+                }}
+              >
                 <View style={styles.cancellationPolicyContainer}>
                   <Text
-                    style={{ fontSize: 12, color: "gray", fontWeight: 400 }}
+                    style={{
+                      fontSize: 9,
+                      color: "gray",
+                      fontWeight: 500,
+                      fontFamily: "sans-serif",
+                    }}
                   >
                     100% cancellation fee will be applicable if you decide to
                     cancel the order anytime after order placement.Avoid
@@ -260,6 +355,7 @@ const styles = StyleSheet.create({
   billSummaryRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingHorizontal: 5,
   },
   cancellationPolicyContainer: {
     backgroundColor: "white",
@@ -274,31 +370,32 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 10,
     backgroundColor: "white",
-    alignItems: "flex-end",
+    // alignItems: "flex-end",
     paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     borderTopColor: "gray",
     borderTopWidth: 0.1,
     elevation: 10,
     flexDirection: "row",
     alignItems: "center",
+    paddingBottom: 20,
   },
   totalText: {
     fontWeight: "bold",
-    fontSize: 22,
+    fontSize: 16,
     paddingLeft: 10,
   },
   placeOrderButton: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     backgroundColor: color.darkPink,
     borderRadius: 12,
-    width: 100,
-    maxWidth: 150,
   },
   placeOrderButtonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: "500",
+    fontFamily: "sans-serif",
   },
 });
 

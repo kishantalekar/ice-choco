@@ -46,6 +46,24 @@ const ProfileScreen = () => {
           </Text>
           <Text style={styles.profileEmail}>{auth?.currentUser?.email}</Text>
         </View>
+        {/* <TouchableOpacity
+          style={{ position: "absolute", right: 15, top: 18 }}
+          onPress={() =>
+            navigation.navigate("EditProfileScreen", {
+              email: auth?.currentUser?.email,
+            })
+          }
+        >
+          <Text
+            style={{
+              color: color.darkPink,
+              fontWeight: "bold",
+              textDecorationLine: "underline",
+            }}
+          >
+            Edit Profile
+          </Text>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.ordersContainer}>
         <Text style={styles.sectionTitle}>Food Orders</Text>
@@ -169,20 +187,24 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
   },
   profileInfo: {
     paddingLeft: 20,
     gap: 3,
+    justifyContent: "space-between",
   },
   profileName: {
-    fontWeight: "500",
-    fontSize: 28,
+    fontWeight: "bold",
+    fontSize: 18,
+    fontFamily: "sans-serif",
   },
   profileEmail: {
-    fontWeight: "400",
-    fontSize: 18,
+    fontWeight: 500,
+    fontSize: 12,
+    fontFamily: "sans-serif",
+    color: "gray",
   },
   ordersContainer: {
     backgroundColor: "white",
@@ -193,7 +215,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "500",
     borderLeftWidth: 3,
     borderColor: "#b30000",
@@ -211,7 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   orderItemText: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: "400",
   },
   divider: {
@@ -227,7 +249,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "500",
     borderLeftWidth: 3,
     borderColor: "#b30000",
@@ -245,7 +267,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   moreItemText: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: "400",
   },
   divider: {

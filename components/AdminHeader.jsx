@@ -23,18 +23,18 @@ const AdminHeader = ({ status, setStatus }) => {
           alignItems: "center",
         }}
       >
-        <Text style={{ color: color.blue, fontSize: 18, fontWeight: 400 }}>
+        <Text style={{ color: color.blue, fontSize: 14, fontWeight: "bold" }}>
           Frozen Factory Admin Panel
         </Text>
         <TouchableOpacity
           style={{
             backgroundColor: color.darkBlue,
-            padding: 10,
+            padding: 8,
             borderRadius: 12,
           }}
           onPress={handleLogout}
         >
-          <Text style={{ color: "white" }}>Logout</Text>
+          <Text style={{ color: "white", fontSize: 10 }}>Logout</Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -43,7 +43,11 @@ const AdminHeader = ({ status, setStatus }) => {
           style={{ marginVertical: 10 }}
         >
           <Text
-            style={{ color: color.darkBlue, textDecorationLine: "underline" }}
+            style={{
+              color: color.darkBlue,
+              textDecorationLine: "underline",
+              fontSize: 10,
+            }}
           >
             Show Feedbacks from customers
           </Text>
@@ -71,8 +75,15 @@ const AdminHeader = ({ status, setStatus }) => {
           }}
           onPress={() => setStatus("all")}
         >
-          <Text style={{ color: status === "all" ? "white" : "black" }}>
-            all orders
+          <Text
+            style={{
+              color: status === "all" ? "white" : "black",
+              fontSize: 10,
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}
+          >
+            All orders
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -87,9 +98,16 @@ const AdminHeader = ({ status, setStatus }) => {
           }}
           onPress={() => setStatus("pending")}
         >
-          <Text style={{ color: status === "pending" ? "white" : "black" }}>
+          <Text
+            style={{
+              color: status === "pending" ? "white" : "black",
+              fontSize: 10,
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}
+          >
             {" "}
-            pending orders
+            Pending orders
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -104,7 +122,14 @@ const AdminHeader = ({ status, setStatus }) => {
           }}
           onPress={() => setStatus("approved")}
         >
-          <Text style={{ color: status === "approved" ? "white" : "black" }}>
+          <Text
+            style={{
+              color: status === "approved" ? "white" : "black",
+              fontSize: 10,
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}
+          >
             {" "}
             Approved orders
           </Text>
@@ -121,9 +146,16 @@ const AdminHeader = ({ status, setStatus }) => {
           }}
           onPress={() => setStatus("delivered")}
         >
-          <Text style={{ color: status === "delivered" ? "white" : "black" }}>
+          <Text
+            style={{
+              color: status === "delivered" ? "white" : "black",
+              fontSize: 10,
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}
+          >
             {" "}
-            delivered orders
+            Delivered orders
           </Text>
         </TouchableOpacity>
       </ScrollView>

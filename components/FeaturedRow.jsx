@@ -6,7 +6,7 @@ const FeaturedRow = ({ featured }) => {
   return (
     <View style={{ marginHorizontal: 20, marginVertical: 15, gap: 10 }}>
       <Text
-        style={{ fontSize: 20, fontWeight: "bold", fontFamily: "sans-serif" }}
+        style={{ fontSize: 18, fontWeight: "bold", fontFamily: "sans-serif" }}
       >
         {featured?.name}
       </Text>
