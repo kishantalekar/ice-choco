@@ -27,6 +27,8 @@ const HomeScreen = () => {
         setFeatured(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setRefreshing(false);
       }
     };
     try {
@@ -34,9 +36,7 @@ const HomeScreen = () => {
       // Perform data fetching or any other operations you need here
       // For example, you can fetch new data from an API, update state, etc.
       getFeaturedsFromSanity();
-      setTimeout(() => {
-        setRefreshing(false);
-      }, 2000); // You can set a delay to simulate the loading time
+      // You can set a delay to simulate the loading time
     } catch (error) {
       console.log(error);
     }
