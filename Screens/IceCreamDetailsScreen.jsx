@@ -3,7 +3,7 @@ import React from "react";
 import { urlFor } from "../sanity";
 import { Ionicons, FontAwesome5, AntDesign, Entypo } from "@expo/vector-icons";
 import { color } from "../styles/colors";
-import { Rating } from "react-native-ratings";
+
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -94,7 +94,7 @@ const IceCreamDetailsScreen = ({ route }) => {
       </View>
       <View style={styles.detailsContainer}>
         <Text style={styles.name}>{iceCream?.name}</Text>
-        <View style={styles.ratingContainer}>
+        {/* <View style={styles.ratingContainer}>
           <Rating
             ratingCount={5}
             imageSize={14}
@@ -103,7 +103,7 @@ const IceCreamDetailsScreen = ({ route }) => {
             size={12}
             readonly={true}
           />
-        </View>
+        </View> */}
         <Text style={styles.description}>{iceCream?.short_description}</Text>
         <View style={styles.footer}>
           <View style={styles.priceContainer}>

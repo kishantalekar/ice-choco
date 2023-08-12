@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import OrderItemCard from "./OrderItemCard";
-
 import { color } from "../styles/colors";
 import { addRatingToOrders, updateOrderStatus } from "../api/firebaseApi";
 import { Picker } from "@react-native-picker/picker";
-import RatingComponent from "./RatingComponent";
+
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
   const [selectedValue, setSelectedValue] = useState(
@@ -228,10 +227,6 @@ const OrderCard = ({ order, adminPage, setIsStatusChange }) => {
               />
             </View>
           </View>
-          {/* <RatingComponent
-            rating={order?.rating}
-            handleRatingChange={handleRatingChange}
-          /> */}
         </>
       )}
       <View

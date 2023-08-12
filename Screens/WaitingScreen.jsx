@@ -17,6 +17,7 @@ const WaitingScreen = () => {
 
       if (user) {
         const { email, name, uid } = user;
+        console.log("first");
         dispatch(currentUser({ email, name, uid }));
         if (email == "frozenfactory123@gmail.com") {
           navigation.navigate("AdminScreen");
