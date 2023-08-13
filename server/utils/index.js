@@ -1,5 +1,5 @@
 function formatOrderDetails(orderData) {
-  const { userId, items, time, name, email, totalPrice } = orderData;
+  const { userId, items, time, name, email, totalPrice, address } = orderData;
 
   let formattedItems = items
     .map((item) => `Product ID: ${item.productId}, Quantity: ${item.quantity}`)
@@ -9,7 +9,7 @@ function formatOrderDetails(orderData) {
 - Time: ${time}
 - Name: ${name || "Kishan"}
 - Email: ${email}
-- Address: ${address}
+- Address: ${address || "not available"}
 - Items:\n${formattedItems}
 - Total Price: ${totalPrice}`;
 
