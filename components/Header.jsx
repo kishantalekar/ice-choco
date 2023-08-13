@@ -91,13 +91,13 @@ const Header = ({ searchQuery, setSearchQuery }) => {
     i += 1;
     const addressParts = [];
 
-    if (street) {
+    if (street !== null && street) {
       addressParts.push(street);
     }
-    if (district) {
+    if (district !== null && district) {
       addressParts.push(district);
     }
-    if (city) {
+    if (city !== null && city) {
       addressParts.push(city);
     }
 
@@ -113,6 +113,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
   const handleLocation = () => {
     navigation.navigate("LocationScreen");
   };
+  console.log(auth?.currentUser, "from ");
   return (
     <>
       <View style={styles.container}>
@@ -136,7 +137,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
           </View>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-          {user == null ? (
+          {auth.currentUser === null ? (
             <TouchableOpacity
               onPress={() => navigation.navigate("Login")}
               style={{

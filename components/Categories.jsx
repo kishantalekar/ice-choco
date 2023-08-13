@@ -95,7 +95,8 @@ const Categories = ({ refreshing }) => {
                   textAlign: "center",
                   color: color.gray,
                   fontWeight: "bold",
-                  fontSize: 14,
+                  fontSize: 10,
+                  fontFamily: "sans-serif",
                 }}
               >
                 {category.name}

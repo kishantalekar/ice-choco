@@ -15,10 +15,10 @@ const ProfileScreen = () => {
   const handleLogout = async () => {
     await onLogOut();
     dispatch(logOut());
-    navigation.navigate("MainTab");
+    navigation.navigate("Home");
   };
   const user = useSelector((state) => state.user.user);
-
+  console.log(auth?.currentUser);
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -27,7 +27,7 @@ const ProfileScreen = () => {
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" />
       </TouchableOpacity>
-      {auth?.currentUser ? (
+      {auth?.currentUser !== null ? (
         <>
           <View style={styles.profileContainer}>
             {auth.currentUser?.photoURL ? (

@@ -94,11 +94,11 @@ const PopularBrands = ({ refreshing }) => {
                     textAlign: "center",
                     color: color.gray,
                     fontWeight: "bold",
-                    fontSize: 14,
+                    fontSize: 10,
                     textTransform: "capitalize",
                   }}
                 >
-                  {brand?.name}
+                  {brand?.name.substring(0, 15)}
                 </Text>
               </TouchableOpacity>
             );
