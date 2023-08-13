@@ -40,6 +40,9 @@ const WaitingScreen = () => {
       navigation.navigate("Login");
     }
   };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <View
       style={{

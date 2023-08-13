@@ -15,7 +15,7 @@ const ProfileScreen = () => {
   const handleLogout = async () => {
     await onLogOut();
     dispatch(logOut());
-    navigation.navigate("Home");
+    navigation.navigate("MainTab");
   };
   const user = useSelector((state) => state.user.user);
 
@@ -27,26 +27,30 @@ const ProfileScreen = () => {
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" />
       </TouchableOpacity>
-      <View style={styles.profileContainer}>
-        {auth.currentUser?.photoURL ? (
-          <Image
-            source={{ uri: auth.currentUser?.photoURL }}
-            style={styles.profileImage}
-          />
-        ) : (
-          <Image
-            source={require("../assets/male.jpg")}
-            style={styles.profileImage}
-          />
-        )}
+      {auth?.currentUser ? (
+        <>
+          <View style={styles.profileContainer}>
+            {auth.currentUser?.photoURL ? (
+              <Image
+                source={{ uri: auth.currentUser?.photoURL }}
+                style={styles.profileImage}
+              />
+            ) : (
+              <Image
+                source={require("../assets/male.jpg")}
+                style={styles.profileImage}
+              />
+            )}
 
-        <View style={styles.profileInfo}>
-          <Text style={styles.profileName}>
-            {auth?.currentUser?.displayName || "Anonymous"}
-          </Text>
-          <Text style={styles.profileEmail}>{auth?.currentUser?.email}</Text>
-        </View>
-        {/* <TouchableOpacity
+            <View style={styles.profileInfo}>
+              <Text style={styles.profileName}>
+                {auth?.currentUser?.displayName || "Anonymous"}
+              </Text>
+              <Text style={styles.profileEmail}>
+                {auth?.currentUser?.email}
+              </Text>
+            </View>
+            {/* <TouchableOpacity
           style={{ position: "absolute", right: 15, top: 18 }}
           onPress={() =>
             navigation.navigate("EditProfileScreen", {
@@ -64,102 +68,140 @@ const ProfileScreen = () => {
             Edit Profile
           </Text>
         </TouchableOpacity> */}
-      </View>
-      <View style={styles.ordersContainer}>
-        <Text style={styles.sectionTitle}>Food Orders</Text>
-        <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
-          <TouchableOpacity
-            style={styles.orderItem}
-            onPress={() => navigation.navigate("OrderScreen")}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <Feather
-                name="shopping-bag"
-                size={14}
-                color="gray"
-                style={styles.orderItemIcon}
-              />
-              <Text style={styles.orderItemText}>Your orders</Text>
+          </View>
+          <View style={styles.ordersContainer}>
+            <Text style={styles.sectionTitle}>Food Orders</Text>
+            <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
+              <TouchableOpacity
+                style={styles.orderItem}
+                onPress={() => navigation.navigate("OrderScreen")}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <Feather
+                    name="shopping-bag"
+                    size={14}
+                    color="gray"
+                    style={styles.orderItemIcon}
+                  />
+                  <Text style={styles.orderItemText}>Your orders</Text>
+                </View>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+              <TouchableOpacity
+                style={styles.orderItem}
+                onPress={() => navigation.navigate("FavouriteScreen")}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <Entypo
+                    name="heart-outlined"
+                    size={14}
+                    color="gray"
+                    style={styles.orderItemIcon}
+                  />
+                  <Text style={styles.orderItemText}>Favourite orders</Text>
+                </View>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+              </TouchableOpacity>
             </View>
-            <Entypo name="chevron-small-right" size={24} color="black" />
-          </TouchableOpacity>
-          <View style={styles.divider}></View>
-          <TouchableOpacity
-            style={styles.orderItem}
-            onPress={() => navigation.navigate("FavouriteScreen")}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <Entypo
-                name="heart-outlined"
-                size={14}
-                color="gray"
-                style={styles.orderItemIcon}
-              />
-              <Text style={styles.orderItemText}>Favourite orders</Text>
+          </View>
+          <View style={styles.moreContainer}>
+            <Text style={styles.sectionTitle}>More</Text>
+            <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
+              <TouchableOpacity
+                style={styles.moreItem}
+                onPress={() => navigation.navigate("AboutScreen")}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <Feather
+                    name="info"
+                    size={14}
+                    color="gray"
+                    style={styles.moreItemIcon}
+                  />
+                  <Text style={styles.moreItemText}>About</Text>
+                </View>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+              <TouchableOpacity
+                style={styles.moreItem}
+                onPress={() => navigation.navigate("FeedbackScreen")}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <Feather
+                    name="edit"
+                    size={14}
+                    color="gray"
+                    style={styles.moreItemIcon}
+                  />
+                  <Text style={styles.moreItemText}>Send feedback</Text>
+                </View>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+              <TouchableOpacity style={styles.moreItem} onPress={handleLogout}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <Feather
+                    name="power"
+                    size={14}
+                    color="gray"
+                    style={styles.moreItemIcon}
+                  />
+                  <Text style={styles.moreItemText}>Logout</Text>
+                </View>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+              </TouchableOpacity>
             </View>
-            <Entypo name="chevron-small-right" size={24} color="black" />
+          </View>
+        </>
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text
+              style={{
+                color: color.darkBlue,
+                fontSize: 14,
+                textDecorationLine: "underline",
+              }}
+            >
+              Please Login to see your profile
+            </Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.moreContainer}>
-        <Text style={styles.sectionTitle}>More</Text>
-        <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
-          <TouchableOpacity
-            style={styles.moreItem}
-            onPress={() => navigation.navigate("AboutScreen")}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <Feather
-                name="info"
-                size={14}
-                color="gray"
-                style={styles.moreItemIcon}
-              />
-              <Text style={styles.moreItemText}>About</Text>
-            </View>
-            <Entypo name="chevron-small-right" size={24} color="black" />
-          </TouchableOpacity>
-          <View style={styles.divider}></View>
-          <TouchableOpacity
-            style={styles.moreItem}
-            onPress={() => navigation.navigate("FeedbackScreen")}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <Feather
-                name="edit"
-                size={14}
-                color="gray"
-                style={styles.moreItemIcon}
-              />
-              <Text style={styles.moreItemText}>Send feedback</Text>
-            </View>
-            <Entypo name="chevron-small-right" size={24} color="black" />
-          </TouchableOpacity>
-          <View style={styles.divider}></View>
-          <TouchableOpacity style={styles.moreItem} onPress={handleLogout}>
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <Feather
-                name="power"
-                size={14}
-                color="gray"
-                style={styles.moreItemIcon}
-              />
-              <Text style={styles.moreItemText}>Logout</Text>
-            </View>
-            <Entypo name="chevron-small-right" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
+      )}
     </SafeAreaView>
   );
 };

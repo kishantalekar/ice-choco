@@ -84,13 +84,13 @@ const EditProfileScreen = () => {
     }
   };
 
-  useEffect(() => {
-    const getUserDetailsFromFirebase = async () => {
-      const data = await getUserDetails(auth?.currentUser?.email);
-      console.log(data);
-    };
-    getUserDetailsFromFirebase();
-  });
+  // useEffect(() => {
+  //   const getUserDetailsFromFirebase = async () => {
+  //     const data = await getUserDetails(auth?.currentUser?.email);
+  //     console.log(data);
+  //   };
+  //   getUserDetailsFromFirebase();
+  // });
 
   return (
     <SafeAreaView

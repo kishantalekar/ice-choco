@@ -72,29 +72,29 @@ const LoginScreen = () => {
       setLoginLoading(false);
     }
   };
-  // useEffect(() => {
-  //   // Subscribe to authentication state changes
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     // `user` will be null if the user is signed out
-  //     // and will contain the user object if the user is signed in
-  //     // setCurrentUser(user);
+  useEffect(() => {
+    // Subscribe to authentication state changes
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // `user` will be null if the user is signed out
+      // and will contain the user object if the user is signed in
+      // setCurrentUser(user);
 
-  //     if (user) {
-  //       const { email, name, uid } = user;
-  //       dispatch(currentUser({ email, name, uid }));
-  //       if (email == "frozenfactory123@gmail.com") {
-  //         navigation.navigate("AdminScreen");
-  //       } else {
-  //         navigation.navigate("MainTab");
-  //       }
-  //     }
-  //   });
-  //   setLoading(false);
+      if (user) {
+        const { email, name, uid } = user;
+        dispatch(currentUser({ email, name, uid }));
+        if (email == "frozenfactory123@gmail.com") {
+          navigation.navigate("AdminScreen");
+        } else {
+          navigation.navigate("MainTab");
+        }
+      }
+    });
+    setLoading(false);
 
-  //   // Clean up the subscription when the component unmounts
-  //   return () => unsubscribe();
-  // }, []);
-
+    // Clean up the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []);
+  console.log(auth?.currentUser?.email);
   return (
     //  <>
     //   (
@@ -105,76 +105,70 @@ const LoginScreen = () => {
     //     </View>
     //   ) : (
     <KeyboardAvoidingView style={styles.container}>
-      {auth.currentUser == null ? (
-        <View style={styles.content}>
-          <Text style={styles.heading}>Welcome</Text>
-          <TextInput
-            placeholder="Enter user name"
-            value={userName}
-            keyboardType="email-address"
-            onChangeText={(e) => setUserName(e)}
-            placeholderTextColor={usernameFocused ? color.blue : "gray"}
-            style={[
-              styles.input,
-              {
-                borderColor: usernameFocused ? color.blue : "gray",
-                color: usernameFocused ? color.blue : "gray",
-              },
-            ]}
-            onFocus={handleUsernameFocus}
-            onBlur={handleUsernameBlur}
-            autoCapitalize="none"
-          />
+      <View style={styles.content}>
+        <Text style={styles.heading}>Welcome</Text>
+        <TextInput
+          placeholder="Enter user name"
+          value={userName}
+          keyboardType="email-address"
+          onChangeText={(e) => setUserName(e)}
+          placeholderTextColor={usernameFocused ? color.blue : "gray"}
+          style={[
+            styles.input,
+            {
+              borderColor: usernameFocused ? color.blue : "gray",
+              color: usernameFocused ? color.blue : "gray",
+            },
+          ]}
+          onFocus={handleUsernameFocus}
+          onBlur={handleUsernameBlur}
+          autoCapitalize="none"
+        />
 
-          <TextInput
-            placeholder="Password"
-            keyboardType="visible-password"
-            value={password}
-            onChangeText={(e) => setPassword(e)}
-            placeholderTextColor={passwordFocused ? color.blue : "gray"}
-            style={[
-              styles.input,
-              {
-                borderColor: passwordFocused ? color.blue : "gray",
-                color: passwordFocused ? color.blue : "gray",
-              },
-            ]}
-            onFocus={handlePasswordFocus}
-            onBlur={handlePasswordBlur}
-          />
+        <TextInput
+          placeholder="Password"
+          keyboardType="visible-password"
+          value={password}
+          onChangeText={(e) => setPassword(e)}
+          placeholderTextColor={passwordFocused ? color.blue : "gray"}
+          style={[
+            styles.input,
+            {
+              borderColor: passwordFocused ? color.blue : "gray",
+              color: passwordFocused ? color.blue : "gray",
+            },
+          ]}
+          onFocus={handlePasswordFocus}
+          onBlur={handlePasswordBlur}
+        />
 
-          {/* <Text style={styles.forgotPasswordText}>Forgot Password</Text> */}
-          <Button
-            text={"Sign in"}
-            styles={styles.signInButton}
-            handlePress={handleSignIn}
-            loading={loginLoading}
-          />
-          <Button
-            text={"Register now"}
-            styles={styles.registerButton}
-            handlePress={() => navigation.navigate("Register")}
-          />
-          <TouchableOpacity
-            style={{ alignItems: "center", paddingTop: 20 }}
-            onPress={() => navigation.navigate("MainTab")}
+        {/* <Text style={styles.forgotPasswordText}>Forgot Password</Text> */}
+        <Button
+          text={"Sign in"}
+          styles={styles.signInButton}
+          handlePress={handleSignIn}
+          loading={loginLoading}
+        />
+        <Button
+          text={"Register now"}
+          styles={styles.registerButton}
+          handlePress={() => navigation.navigate("Register")}
+        />
+        <TouchableOpacity
+          style={{ alignItems: "center", paddingTop: 20 }}
+          onPress={() => navigation.navigate("MainTab")}
+        >
+          <Text
+            style={{
+              color: "gray",
+              fontWeight: 400,
+              fontFamily: "sans-serif",
+            }}
           >
-            <Text
-              style={{
-                color: "gray",
-                fontWeight: 400,
-                fontFamily: "sans-serif",
-              }}
-            >
-              Skip for now{" "}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View style={{ justifyContent: "center", flex: 1 }}>
-          <ActivityIndicator size={"large"} />
-        </View>
-      )}
+            Skip for now{" "}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
     // )
     //  <View style={styles.imageContainer}>

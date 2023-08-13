@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ice-choco",
+    "name": "frozen factory",
     "slug": "ice-choco",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon3.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

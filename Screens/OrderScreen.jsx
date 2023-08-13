@@ -30,7 +30,7 @@ const OrderScreen = () => {
         setLoading(false);
       }
     };
-    getOrderFromDb();
+    if (auth?.currentUser) getOrderFromDb();
     //  getOrders(email, setOrders);
 
     // Unsubscribe from the snapshot listener when the component unmounts

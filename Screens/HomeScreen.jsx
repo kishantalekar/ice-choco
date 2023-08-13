@@ -11,7 +11,6 @@ import {
 } from "../sanity";
 import FeaturedRow from "../components/FeaturedRow";
 import ProductSearch from "../components/ProductSearch";
-import { BackHandler, Alert } from "react-native";
 
 const HomeScreen = () => {
   const [featured, setFeatured] = useState([]);
@@ -74,31 +73,31 @@ const HomeScreen = () => {
     getSearchResults();
   }, [searchQuery]);
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert(
-        "Exit App",
-        "Are you sure you want to exit?",
-        [
-          {
-            text: "Cancel",
-            onPress: () => null,
-            style: "cancel",
-          },
-          { text: "Exit", onPress: () => BackHandler.exitApp() },
-        ],
-        { cancelable: false }
-      );
-      return true; // Prevent default back behavior
-    };
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     Alert.alert(
+  //       "Exit App",
+  //       "Are you sure you want to exit?",
+  //       [
+  //         {
+  //           text: "Cancel",
+  //           onPress: () => null,
+  //           style: "cancel",
+  //         },
+  //         { text: "Exit", onPress: () => BackHandler.exitApp() },
+  //       ],
+  //       { cancelable: false }
+  //     );
+  //     return true; // Prevent default back behavior
+  //   };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
+  //   const backHandler = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     backAction
+  //   );
 
-    return () => backHandler.remove(); // Clean up when the component is unmounted
-  }, []);
+  //   return () => backHandler.remove(); // Clean up when the component is unmounted
+  // }, []);
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>

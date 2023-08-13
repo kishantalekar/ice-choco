@@ -7,7 +7,6 @@ export const locationSlice = createSlice({
   },
   reducers: {
     addLocation: (state, action) => {
-      console.log(action.payload);
       state.location = action.payload;
     },
   },

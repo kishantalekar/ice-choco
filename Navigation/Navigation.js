@@ -1,29 +1,3 @@
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import RegisterScreen from "../Screens/RegisterScreen";
-// import LoginScreen from "../Screens/LoginScreen";
-// import HomeScreen from "../Screens/HomeScreen";
-// import IceCreamListScreen from "../Screens/IceCreamListScreen";
-// import IceCreamDetailsScreen from "../Screens/IceCreamDetailsScreen";
-
-// const Stack = createNativeStackNavigator();
-// const Navigation = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator screenOptions={{ headerShown: false }}>
-//         <Stack.Screen name="Home" component={HomeScreen} />
-//         <Stack.Screen name="Login" component={LoginScreen} />
-//         <Stack.Screen name="Register" component={RegisterScreen} />
-//         <Stack.Screen name="IceCreamList" component={IceCreamListScreen} />
-//         <Stack.Screen
-//           name="IceCreamDetails"
-//           component={IceCreamDetailsScreen}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-// export default Navigation;
 import React from "react";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -92,14 +66,9 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Waiting"
           component={WaitingScreen}
-          options={{ headerShown: false }}
-        /> */}
-        <Stack.Screen
-          name="MainTab"
-          component={MainTabNavigator}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -107,6 +76,12 @@ const Navigation = () => {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="MainTab"
+          component={MainTabNavigator}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
