@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   headerText: {
-    fontWeight: "500",
+    fontWeight: 500,
     fontSize: 22,
     color: "white",
   },
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   description: {
     color: "gray",
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: 400,
     lineHeight: 18,
     paddingTop: 5,
   },
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   priceLabel: {
-    fontWeight: "400",
+    fontWeight: 400,
     fontSize: 12,
   },
   price: {
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     color: "white",
-    fontWeight: "500",
+    fontWeight: 500,
     fontSize: 18,
   },
   quantityContainer: {

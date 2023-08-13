@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   heading: {
     marginBottom: 20,
     textAlign: "center",
-    fontWeight: "400",
+    fontWeight: 400,
     fontSize: 20,
   },
   input: {

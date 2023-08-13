@@ -22,7 +22,7 @@ app.post("/order-details", (req, res) => {
     .create({
       body: formatOrderDetails(order),
       from: "whatsapp:+14155238886",
-      to: "whatsapp:+919353167354",
+      to: "whatsapp:+916366098239",
     })
     .then((message) => console.log(message.sid));
 

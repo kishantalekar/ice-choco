@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     color: "white",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: 10,
   },
   description: {
     color: color.gray,
     fontSize: 10,
-    fontWeight: "400",
+    fontWeight: 400,
     maxWidth: 200,
     fontFamily: "sans-serif",
     width: 150,

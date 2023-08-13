@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   locationDescription: {
     color: color.pink,
     fontSize: 10,
-    fontWeight: "400",
+    fontWeight: 400,
   },
   profileImage: {
     width: 30,

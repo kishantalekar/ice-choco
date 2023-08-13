@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   },
   orderItemText: {
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: 400,
   },
   divider: {
     borderBottomColor: "#b3b3b3",
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: 500,
     borderLeftWidth: 3,
     borderColor: "#b30000",
     paddingLeft: 10,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   },
   moreItemText: {
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: 400,
   },
   divider: {
     borderBottomColor: "#b3b3b3",
