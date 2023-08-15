@@ -87,4 +87,4 @@ Open the Expo Go app on your mobile device and scan the QR code displayed in the
 
 ## 🔗 Contact me at
 
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](linkedin.com/in/kishan-talekar-2613b8260)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/kishan-talekar-2613b8260)
