@@ -17,5 +17,6 @@ web-build/
 .metro-health-check*
 
 .env
+.eas.json
 
 package-lock.json
