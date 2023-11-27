@@ -67,7 +67,7 @@ Open the Expo Go app on your mobile device and scan the QR code displayed in the
 
 ![3](https://github.com/kishantalekar/ice-choco/assets/115180515/672e2fa6-55e0-4fa7-aa0f-390d2bc317b2)
 
-![6](https://github.com/kishantalekar/ice-choco/assets/115180515/3b93398d-bf6a-4c6b-861e-e688cec20934)
+
 
 ![7](https://github.com/kishantalekar/ice-choco/assets/115180515/522c38c2-580d-4b5a-8693-ab5b530cc558)
 
